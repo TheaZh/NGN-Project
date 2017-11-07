@@ -41,15 +41,15 @@ class Course:
         data['assignment_list'].append('COMS6111' + '_A' + str(length + 1))
         self.course_collection.update_one({'course_id': course_id}, {'$set': data})
 
-    def close_gridFS(self):
+    def close_DB(self):
         self.client.close()
-        
+
 
 if __name__ == '__main__':
     '''course_data = [
         {'course_id' : 'COMS6111',
         'course_name': 'Advanced Database Systems',
-        'assignment_list': ['COMS6111_A1', 'COMS6111_A2'],
+        'assignment_list': ['COMS6111_A1', 'COMS6111_A2','COMS6111_A3'],
         'grader_id': 'ac1007'
         },
             {'course_id' : 'ELEN6770',
@@ -85,7 +85,7 @@ if __name__ == '__main__':
     ]
     course = Course()
     course.insert_many_courses(course_data)
-    course.close_gridFS()'''
+    course.close_DB()'''
 
     course = Course()
     # data = course.test_test()
