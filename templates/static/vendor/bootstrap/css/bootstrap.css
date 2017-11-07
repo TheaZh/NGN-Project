@@ -5721,6 +5721,10 @@ a.bg-light:focus, a.bg-light:hover {
 }
 
 .bg-dark {
+  background-image: url(./background-login.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   background-color: #343a40 !important;
 }
 
