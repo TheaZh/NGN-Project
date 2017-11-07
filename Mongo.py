@@ -1,5 +1,10 @@
 from pymongo import MongoClient
 
+# mLab
+# assignment.manager.ngn@gmail.com
+# assignment.manager123
+# mongoDB Cloud: mongodb://assignment.manager:assignment.manager123@ds161873.mlab.com:61873/assignment-management-system
+
 class Mongo:
     # MongoDB URI - for normal collections
     mongo_uri = "mongodb://assignment.manager:assignment.manager123@ds161873.mlab.com:61873/assignment-management-system"
