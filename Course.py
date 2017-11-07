@@ -1,5 +1,22 @@
 from pymongo import MongoClient
 
+'''
+#### Example Course Schema ####
+
+{
+    "_id": {
+        "$oid": "5a014a7962d4683f76c1626a"
+    },
+    "course_id": "COMS4396",
+    "course_name": "Introduction to System Design",
+    "assignment_list": [
+        "COMS4396_A1"
+    ],
+    "grader_id": "xz1332"
+}
+
+'''
+
 class Course:
     def __init__(self):
         self.mongo_uri = "mongodb://assignment:assignment123@ds161873.mlab.com:61873/assignment-management-system"
@@ -18,8 +35,15 @@ class Course:
     def insert_many_courses(self, seed_data):
         self.course_collection.insert_many(seed_data)
 
+    def add_assignment(self, course_id):
+        data = self.course_collection.find_one({'course_id': course_id})
+        length = len(data['assignment_list'])
+        data['assignment_list'].append('COMS6111' + '_A' + str(length + 1))
+        self.course_collection.update_one({'course_id': course_id}, {'$set': data})
+
     def close_gridFS(self):
         self.client.close()
+        
 
 if __name__ == '__main__':
     '''course_data = [
@@ -62,3 +86,7 @@ if __name__ == '__main__':
     course = Course()
     course.insert_many_courses(course_data)
     course.close_gridFS()'''
+
+    course = Course()
+    # data = course.test_test()
+    # print data
