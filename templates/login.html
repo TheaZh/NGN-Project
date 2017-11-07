@@ -7,10 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>SB Admin - Start Bootstrap Template</title>
+  <title>Log In</title>
   <!-- Bootstrap core CSS-->
   <link href="../static/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
+  <link href="https://fonts.googleapis.com/css?family=Satisfy|Slabo+27px|Hammersmith+One|Indie+Flower|Permanent+Marker|Gochi+Hand|Roboto|Gabriela|Sniglet|NTR|Pacifico|Dancing+Script" rel="stylesheet" type="text/css">
   <link href="../static/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
   <!-- Custom styles for this template-->
   <link href="../static/css/sb-admin.css" rel="stylesheet">
@@ -18,25 +19,34 @@
 
 <body class="bg-dark">
   <div class="container">
-    <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Login</div>
+      <div class = "center">
+          <div class="wel"> Welcome </div>
+      </div>
+    <div class="card card-login mx-auto">
+      <div class="card-header"><b>Login</b> with your UNI</div>
       <div class="card-body">
+          <p class="card-subtitle text-muted" name="error_msg" id="error_msg"></p>
         <form>
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <label for="exampleInputEmail1">UNI</label>
+            <input class="form-control" id="uni" name="uni" type="text"  placeholder="Enter your UNI">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password">
+            <input class="form-control" id="password" name="password" type="password" placeholder="Password">
           </div>
           <div class="form-group">
           </div>
-          <a class="btn btn-primary btn-block" href="index.html">Login</a>
+          <button class="btn btn-primary btn-block" type="button" id="login-button" name="login-button">Login</button>
         </form>
       </div>
     </div>
   </div>
+
+   <!-- customized js -->
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script language="JavaScript" type="text/javascript" src="../static/ngn-js/login.js"></script>
   <!-- Bootstrap core JavaScript-->
   <script src="../static/vendor/jquery/jquery.js"></script>
   <script src="../static/vendor/bootstrap/js/bootstrap.bundle.js"></script>

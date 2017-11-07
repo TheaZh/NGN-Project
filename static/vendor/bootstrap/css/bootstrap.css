@@ -681,6 +681,12 @@ pre code {
   margin-left: -15px;
 }
 
+.center{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
 .no-gutters {
   margin-right: 0;
   margin-left: 0;
@@ -5721,10 +5727,6 @@ a.bg-light:focus, a.bg-light:hover {
 }
 
 .bg-dark {
-  background-image: url(./background-login.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   background-color: #343a40 !important;
 }
 

@@ -18,6 +18,24 @@ body.sticky-footer {
 body.fixed-nav {
   padding-top: 56px; }
 
+
+.wel {
+	font-family: 'Gabriela';
+	font-size: 100px;
+	margin-top: 100px;
+    text-align: center;
+    color: white;
+}
+
+
+.intro {
+	font-family: 'Roboto';
+	font-size: 20px;
+	margin-top: 5px;
+    text-align: center;
+    color: white;
+}
+
 .content-wrapper {
   min-height: calc(100vh - 56px);
   padding-top: 1rem; }
