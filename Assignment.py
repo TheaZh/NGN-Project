@@ -8,9 +8,11 @@ class Assignment:
         self.db = self.client['assignment-management-system']
         self.assignment_collection = self.db['Assignment']
 
+    # insert fake data - not used during program process
     def insert_assignments(self, seed_data):
         self.assignment_collection.insert_many(seed_data)
 
+    # add a new assignment when grader published one
     def add_assignment(self, course_id, description):
         course = Course()
         data = course.course_collection.find_one({'course_id': course_id})

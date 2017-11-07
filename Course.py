@@ -24,6 +24,7 @@ class Course:
         self.db = self.client['assignment-management-system']
         self.course_collection = self.db['Course']
 
+    # not used during programming process
     def insert_course(self, course_id, course_name, assignment_list, grader_id):
         seed_data = {'course_id' : course_id,
                     'course_name': course_name,
@@ -32,9 +33,11 @@ class Course:
                     }
         self.course_collection.insert(seed_data)
 
+    # not used during programming process
     def insert_many_courses(self, seed_data):
         self.course_collection.insert_many(seed_data)
 
+    # when grader publishes one new assignment, use this method to update course collection
     def add_assignment(self, course_id, updated_data):
         self.course_collection.update_one({'course_id': course_id}, {'$set': updated_data})
 
