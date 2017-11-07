@@ -35,18 +35,15 @@ class Course:
     def insert_many_courses(self, seed_data):
         self.course_collection.insert_many(seed_data)
 
-    def add_assignment(self, course_id):
-        data = self.course_collection.find_one({'course_id': course_id})
-        length = len(data['assignment_list'])
-        data['assignment_list'].append('COMS6111' + '_A' + str(length + 1))
-        self.course_collection.update_one({'course_id': course_id}, {'$set': data})
+    def add_assignment(self, course_id, updated_data):
+        self.course_collection.update_one({'course_id': course_id}, {'$set': updated_data})
 
     def close_DB(self):
         self.client.close()
 
 
 if __name__ == '__main__':
-    '''course_data = [
+    course_data = [
         {'course_id' : 'COMS6111',
         'course_name': 'Advanced Database Systems',
         'assignment_list': ['COMS6111_A1', 'COMS6111_A2','COMS6111_A3'],
@@ -85,8 +82,5 @@ if __name__ == '__main__':
     ]
     course = Course()
     course.insert_many_courses(course_data)
-    course.close_DB()'''
+    course.close_DB()
 
-    course = Course()
-    # data = course.test_test()
-    # print data
