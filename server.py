@@ -1,6 +1,6 @@
 from flask import Flask
 from pymongo import MongoClient
-
+import Mongo
 app = Flask(__name__)
 
 # assignment.manager.ngn@gmail.com
