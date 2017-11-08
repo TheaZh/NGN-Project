@@ -26,6 +26,22 @@ $( document ).ready(function() {
                 // successful log in
                 console.log(result)
 
+                // check if the current user is a student or a grader
+                var isGrader = result.isGrader;
+                if(!isGrader){
+                    console.log(result.course_list)
+                    $.ajax({
+                        url: '/student_system',
+                        data: {
+                            'student_data' : JSON.stringify(result)
+                        },
+                        success: function (result) {
+                            localStorage.setItem('courseData', result);
+                            window.location.href = "http://www.baidu.com";
+                        }
+                    });
+                }
+
             },
             error: function(error) {
                 console.log('Error!! ',JSON.stringify(error));

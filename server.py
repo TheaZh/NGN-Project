@@ -33,10 +33,24 @@ def login():
     if '_id' in data:
         data.pop('_id')
 
-    # check if the current user is grader or student
-    if not data['isGrader']: # is a student
-        # result = json.dumps(data)
-        return jsonify(data)
+    return jsonify(data)
+
+@app.route('/student_system')
+def student():
+    data = request.args
+    student_data = json.loads(data.get('student_data'))
+    course_list = student_data['course_list']
+    print course_list
+    course = db['Course']
+    courses_data = []
+    for course_id in course_list:
+        cour = course.find_one({'course_id': course_id})
+        cour.pop('_id')
+        courses_data.append(cour)
+    print courses_data
+    return jsonify(courses_data)
+
+
 
 
 if __name__ == '__main__':
