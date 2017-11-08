@@ -11,11 +11,14 @@ $( document ).ready(function() {
 
         $.ajax({
             url: '/login',
+            async: false,
             data: {
                 'uni': uni,
                 'password': password
             },
             success: function(result){
+
+                // result --  (isGrader & uni) or error_msg
                 for(var key in result){
                     if(key == 'error_msg'){ // no such user or wrong password
                         console.log("ERROR")
@@ -25,28 +28,22 @@ $( document ).ready(function() {
 
                 // successful log in
                 console.log(result)
-
                 // check if the current user is a student or a grader
                 var isGrader = result.isGrader;
-                if(!isGrader){
-                    console.log(result.course_list)
-                    $.ajax({
-                        url: '/student_system',
-                        data: {
-                            'student_data' : JSON.stringify(result)
-                        },
-                        success: function (result) {
-                            localStorage.setItem('courseData', result);
-                            window.location.href = "http://www.baidu.com";
-                        }
-                    });
-                }
+                if(!isGrader){ // is a student
+                    userUNI = {
+                        'uni': result.uni
+                    }
+                    location.href = "/show_student/"+ JSON.stringify(userUNI);
+                    // $.post('/student_system', JSON.stringify(result));
+                    // console.log('redirect')
 
+                }
             },
             error: function(error) {
                 console.log('Error!! ',JSON.stringify(error));
             }
         })
-
+        return false;
     });
 });

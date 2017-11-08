@@ -34,30 +34,14 @@
                 </a>
             </li>
 
+
+
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Assignment Pages">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#Assignment" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-file-text"></i>
                     <span class="nav-link-text">Assignments</span>
                 </a>
-                <ul class="sidenav-second-level collapse" id="Assignment">
-                    <!-- course list -->
-
-                    <li>
-                        <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Course 1</a>
-                        <ul class="sidenav-third-level collapse" id="collapseMulti2">
-                            <li>
-                                <a href="#">Assignment 1</a>
-                            </li>
-                            <li>
-                                <a href="#">Assignment 2</a>
-                            </li>
-                            <li>
-                                <a href="#">Assignment 3</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- end of course list -->
-                </ul>
+                <ul class="sidenav-second-level collapse" id="Assignment"></ul>
             </li>
 
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Grade Pages">
@@ -65,23 +49,11 @@
                     <i class="fa fa-fw fa-check"></i>
                     <span class="nav-link-text">Grades</span>
                 </a>
-                <ul class="sidenav-second-level collapse" id="Grade">
-                    <li>
-                        <a href="#">Course 1</a>
-                    </li>
-                    <li>
-                        <a href="#">Course 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Course 3</a>
-                    </li>
-                    <li>
-                        <a href="#">Course 4</a>
-                    </li>
-                </ul>
+                <ul class="sidenav-second-level collapse" id="Grade"></ul>
             </li>
-
         </ul>
+
+        <!-- nav bar // right side -->
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
                 <a class="nav-link text-center" id="sidenavToggler">
@@ -91,7 +63,7 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link">
+                <a class="nav-link" name="user" id="user">
                     <i class="fa fa-fw fa-user-o"></i></a>
             </li>
             <li class="nav-item">
@@ -101,6 +73,8 @@
         </ul>
     </div>
 </nav>
+
+
 <div class="content-wrapper">
     <div class="container-fluid">
         <!-- Breadcrumbs-->
@@ -108,10 +82,28 @@
             <li class="breadcrumb-item">
                 <a href="#">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">My Dashboard</li>
+            <li class="breadcrumb-item active" id="subtitle">My Dashboard</li>
         </ol>
+
+
+
+        <!-- grade card // table |||||    gradeCard    ||||| -->
+        <div class="card mb-3" id="gradeCard">
+        <div class="card-header">
+          <i class="fa fa-table" id="couse-title"></i> Data Table Example</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"></table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+    <!-- End of grade card // table -->
+
     </div>
+    <p id="userUNI" name="userUNI" style="display: none;">{{ user_uni }}</p>
 </div>
+
 
 <!-- /.container-fluid-->
 <!-- /.content-wrapper-->
@@ -129,11 +121,9 @@
 
 
 <!-- custom script -->
-
-<!--
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="../static/ngn-js/student.js"></script>
--->
-
 
 
 
@@ -143,15 +133,15 @@
 <!-- Core plugin JavaScript-->
 <script src="../static/vendor/jquery-easing/jquery.easing.js"></script>
 <!-- Page level plugin JavaScript-->
-<script src="../static/vendor/chart.js/Chart.js"></script>
+
 <script src="../static/vendor/datatables/jquery.dataTables.js"></script>
 <script src="../static/vendor/datatables/dataTables.bootstrap4.js"></script>
 <!-- Custom scripts for all pages-->
 <script src="../static/js/sb-admin.js"></script>
 <!-- Custom scripts for this page-->
 <script src="../static/js/sb-admin-datatables.js"></script>
-<script src="../static/js/sb-admin-charts.js"></script>
-</div>
+
+
 </body>
 
 </html>
