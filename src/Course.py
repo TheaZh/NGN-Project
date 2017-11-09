@@ -60,7 +60,7 @@ if __name__ == '__main__':
         {'course_id' : 'COMS4111',
         'course_name': 'Introduction to Database Systems',
         'assignment_list': ['COMS4111_A1', 'COMS4111_A2', 'COMS4111_A3'],
-        'grader_id': 'ac1007'
+        'grader_id': 'lu5200'
         },
         {'course_id' : 'COMS1234',
         'course_name': 'Software Development',
@@ -75,7 +75,7 @@ if __name__ == '__main__':
         {'course_id' : 'ELEN4377',
         'course_name': 'Introduction to Computer Networks',
         'assignment_list': ['ELEN4377_A1'],
-        'grader_id':'lu5200'
+        'grader_id':'ac1007'
         },
         {'course_id' : 'COMS4396',
         'course_name': 'Introduction to System Design',

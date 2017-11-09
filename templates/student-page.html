@@ -63,8 +63,7 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" name="user" id="user">
-                    <i class="fa fa-fw fa-user-o"></i></a>
+                <a class="nav-link" name="user" id="user"><!-- user name here --></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="login.html">
@@ -88,15 +87,22 @@
 
 
         <!-- grade card // table |||||    gradeCard    ||||| -->
-        <div class="card mb-3" id="gradeCard">
-        <div class="card-header">
-          <i class="fa fa-table" id="couse-title"></i> Data Table Example</div>
+        <div class="card mb-3" id="gradeCard" style="display:none">
+        <div class="card-header" id="table-course"><!-- course name here --></div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"></table>
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead> <!-- table attributes-->
+                <tr>
+                    <th>Assignment</th>
+                    <th>Score</th>
+                    <th>Comment</th>
+                </tr>
+                </thead>
+                <tbody id="gradeData"><!-- grade data show here--></tbody>
+            </table>
           </div>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
     <!-- End of grade card // table -->
 
@@ -134,12 +140,12 @@
 <script src="../static/vendor/jquery-easing/jquery.easing.js"></script>
 <!-- Page level plugin JavaScript-->
 
-<script src="../static/vendor/datatables/jquery.dataTables.js"></script>
+<!-- <script src="../static/vendor/datatables/jquery.dataTables.js"></script> -->
 <script src="../static/vendor/datatables/dataTables.bootstrap4.js"></script>
 <!-- Custom scripts for all pages-->
 <script src="../static/js/sb-admin.js"></script>
 <!-- Custom scripts for this page-->
-<script src="../static/js/sb-admin-datatables.js"></script>
+<!--<script src="../static/js/sb-admin-datatables.js"></script> -->
 
 
 </body>

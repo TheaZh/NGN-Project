@@ -3,12 +3,33 @@
  */
 
 function response_to_grade(course_id, uni){
-    console.log('Response to Grade -- ', course_id);
+    //console.log('Response to Grade -- ', course_id);
+    $("#gradeData").empty();
+    $("#gradeCard").css("display", "block");
     $("#subtitle").text("Grade");
     $.ajax({
-        url: '/get_grade/' + course_id + '/' + uni,
-        success: function (grade) {
+        url: '/get_grade',
+        data: {
+            'course_id': course_id,
+            'uni': uni
+        },
+        success: function (data) {
+            // data{
+            //      'grade': grade,
+            //      'course_info': course_info,
+            //      'grader': grader_name
+            // }
+            var course_info = data.course_info;
+            var grade_table_title = '<i class="fa fa-check" id="couse-title"></i> '
+                + course_info.course_id + ' - '
+                + course_info.course_name;
+            var grader = ' <span style="float: right;">Grader: ' + data.grader + '</span>'
+            $("#table-course").empty();
+            $("#table-course").append(grade_table_title + grader);
+            //console.log(course_info.course_name);
+
             // grade is a dictionary -- 'assign_id' : [grade, comment]
+            var grade = data.grade;
             var table_body = "";
             for( var key in grade){
                 var assign_id = key;
@@ -21,9 +42,9 @@ function response_to_grade(course_id, uni){
                     var this_comment = grade.assign_id[1];
                 }
                 var assign_number = "Assignment" + assign_id.split("_A")[1];
-                console.log(assign_number);
-                console.log(this_grade);
-                console.log(this.comment);
+                //console.log(assign_number);
+                //console.log(this_grade);
+                //console.log(this_comment);
                 var html = '<tr>'
                         + '<td>' + assign_number + '</td>'
                         + '<td>' + this_grade + '</td>'
@@ -32,29 +53,28 @@ function response_to_grade(course_id, uni){
 
                 table_body = table_body + html;
             }
-            var table_title = '<thead><tr> <th>Assignment</th> <th>Score</th> <th>Comment</th></tr></thead>'
-                            + '<tbody>' + table_body + '</tbody>';
-            $("#dataTable").innerHTML(table_title);
-            return false;
+            $("#gradeData").append(table_body);
         }
     })
 }
 
 $(document).ready(function(){
     var uni = $("#userUNI").text();
-    console.log('uni', uni);
+    //console.log('uni', uni);
     $.ajax({
         url: '/student_system/' + uni,
         success: function (data) {
             // data :  [user_data, courses_data]
-            console.log('whole data: ',data);
-            console.log('user data: ', data[0]);
-            console.log('courses data: ', data[1]);
-            console.log('---------');
+            //console.log('whole data: ',data);
+            //console.log('user data: ', data[0]);
+            //console.log('courses data: ', data[1]);
+            //console.log('---------');
             var user_data = data[0];
             var user_name = user_data.name;
+            var show_user_html = '<i class="fa fa-fw fa-user-o"></i>' + user_name;
             // show user name
-            $("#user").text(user_name);
+            $("#user").empty();
+            $("#user").append(show_user_html);
 
             // course_list
             course_data = data[1];
@@ -62,17 +82,17 @@ $(document).ready(function(){
             var assign_list_html = "";
             for(var index in course_data){
                 var tmp_course = course_data[index];
-                console.log('course: ', tmp_course);
+                //console.log('course: ', tmp_course);
                 // sort assignment list --> start from assignment 1
                 var assign_list = tmp_course.assignment_list.sort();
-                console.log('assign.list: ', assign_list);
+                //console.log('assign.list: ', assign_list);
 
 
                 // for Assignments
                 var sub_assign = "";
                 for( var assign_index in assign_list){
                     var assignment = assign_list[assign_index];
-                    console.log('assignment: ', assignment);
+                    //console.log('assignment: ', assignment);
                     var tmp_assign = '<li><a>Assignment ' + (parseInt(assign_index)+1) + '</a> </li>';
                     sub_assign = sub_assign + tmp_assign;
                 }
@@ -85,17 +105,17 @@ $(document).ready(function(){
 
 
                 // for Grades
-                console.log('$("#userUNI").text():', $("#userUNI").text());
-                var parameters = tmp_course.course_id + ',' +  $("#userUNI").text();
-                console.log("parameters: ", parameters);
-                var tmp_html = '<li><a onclick="response_to_grade('+ tmp_course.course_id + ',' +  $("#userUNI").text()
-                    +')">'
+                //console.log('$("#userUNI").text():', $("#userUNI").text());
+                var tmp_html = '<li><a onclick="response_to_grade(\''+ tmp_course.course_id + '\',\'' +  ($("#userUNI").text()) + '\')'
+                    +'">'
                     + tmp_course.course_id
                     + '</a></li>';
                 grade_list_html = grade_list_html + tmp_html;
             }
+            //console.log('Append HTML');
             $("#Assignment").append(assign_list_html);
             $("#Grade").append(grade_list_html);
+            return false;
         }
     });
 });
