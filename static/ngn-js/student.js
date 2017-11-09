@@ -59,16 +59,18 @@ function response_to_grade(course_id, uni){
 }
 
 function show_content_title(){
-    $("#title-part").css("display", "block")
+    $("#title-part").css("display", "block");
     // $("#content-title").css("display", "block");
     // $("#content-title-line").css("display", "block");
 }
 
 function mute_content_title(){
+    $("#title-part").empty();
     $("#title-part").css("display", "none");
     // $("#content-title").css("display", "none");
     // $("#content-title-line").css("display", "none");
 }
+
 
 $(document).ready(function(){
     var uni = $("#userUNI").text();
@@ -77,6 +79,8 @@ $(document).ready(function(){
 
     // when click the "Grade" first level nav
     $("#grade-nav").click(function () {
+        $("#gradeCard").css("display", "none");
+        $("#title-part").empty();
         // change the subtitle name to 'Grade'
         $("#subtitle").text("Grade");
         // show content title with 'Grade'
