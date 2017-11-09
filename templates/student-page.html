@@ -45,7 +45,7 @@
             </li>
 
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Grade Pages">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#Grade" data-parent="#exampleAccordion">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" id="grade-nav" href="#Grade" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-check"></i>
                     <span class="nav-link-text">Grades</span>
                 </a>
@@ -84,27 +84,30 @@
             <li class="breadcrumb-item active" id="subtitle">My Dashboard</li>
         </ol>
 
+        <div id="title-part" style="display: none">
+            <!-- title of before line -->
+        </div>
 
 
         <!-- grade card // table |||||    gradeCard    ||||| -->
         <div class="card mb-3" id="gradeCard" style="display:none">
-        <div class="card-header" id="table-course"><!-- course name here --></div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead> <!-- table attributes-->
-                <tr>
-                    <th>Assignment</th>
-                    <th>Score</th>
-                    <th>Comment</th>
-                </tr>
-                </thead>
-                <tbody id="gradeData"><!-- grade data show here--></tbody>
-            </table>
-          </div>
+            <div class="card-header" id="table-course"><!-- course name here --></div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead> <!-- table attributes-->
+                        <tr>
+                            <th>Assignment</th>
+                            <th>Score</th>
+                            <th>Comment</th>
+                        </tr>
+                        </thead>
+                        <tbody id="gradeData"><!-- grade data show here--></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
-    <!-- End of grade card // table -->
+        <!-- End of grade card // table -->
 
     </div>
     <p id="userUNI" name="userUNI" style="display: none;">{{ user_uni }}</p>
