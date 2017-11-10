@@ -3,12 +3,17 @@ import json
 from pymongo import MongoClient
 
 # normal MongoDB
-mongo_uri = "mongodb://assignment:assignment123@ds161873.mlab.com:61873/assignment-management-system"
-client = MongoClient(mongo_uri)
+MONGO_URI = "mongodb://assignment:assignment123@ds161873.mlab.com:61873/assignment-management-system"
+client = MongoClient(MONGO_URI)
 db = client['assignment-management-system']
 USER = db['User']
 COURSE = db['Course']
 ASSIGNMENT = db['Assignment']
+
+# # file Database - GridFS
+# GRIDFS_URI = "mongodb://assignment:assignment123@ds249575.mlab.com:49575/files-management"
+# GF = MongoClient(GRIDFS_URI)
+# FILE_DB = GF['files-management']
 
 
 app = Flask(__name__)
@@ -129,6 +134,11 @@ def get_assignment():
     assignment_info.pop('_id')
     print assignment_info
     return jsonify(assignment_info)
+
+@app.route('/get_uploaded_files')
+def get_uploaded_files():
+    file_ids_list = request.args.get('file_ids_list')
+
 
 
 if __name__ == '__main__':

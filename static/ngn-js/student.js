@@ -47,9 +47,6 @@ function response_to_grade(course_id, uni) {
                     var this_comment = grade.assign_id[1];
                 }
                 var assign_number = "Assignment" + assign_id.split("_A")[1];
-                //console.log(assign_number);
-                //console.log(this_grade);
-                //console.log(this_comment);
                 var html = '<tr>' +
                     '<td>' + assign_number + '</td>' +
                     '<td>' + this_grade + '</td>' +
@@ -104,7 +101,7 @@ function empty_assignment_cards() {
 
 function course_assignment(course_id, course_name) {
     empty_assignment_cards();
-    console.log('choose a course at Assignment Nav');
+    // console.log('choose a course at Assignment Nav');
     // change subtitle and description
     $("#subtitle").text("Assignment  /  " + course_id + " - " + course_name);
     $("#title-part").empty();
@@ -115,22 +112,8 @@ function course_assignment(course_id, course_name) {
     $("#title-part").css("display", "block");
 }
 
-function response_to_assignment(course_name, course_id, assignment_id) {
-    /*
-        para_dict = {
-            'course_name': tmp_course.course_name,
-            'course_id': tmp_course.course_id,
-            'assignment': assignment
-        }
-    */
-    // para_dict = JSON.loads(para_dict);
-    // var assignment_id = para_dict.assignment;
-    // var course_name = para_dict.course_name;
-    // var course_id = para_dict.course_id;
+function response_to_assignment(uni, course_name, course_id, assignment_id) {
     course_assignment(course_id, course_name);
-    // console.log('Response to Assignment: ', para_dict);
-    // console.log('****** ', assignment_id, course_name, course_id);
-    // select an assignment under Assignment_Course nav
     mute_content_title();
     empty_assignment_cards();
     $.ajax({
@@ -143,8 +126,9 @@ function response_to_assignment(course_name, course_id, assignment_id) {
             /*
              * data -- assignment info
              */
+
+            //********* Assignment title and description part ***********
             var assignment_num = data.assignment_id.split("_A")[1];
-            console.log("assignment_num: ", assignment_num);
             var assignment_title = '<i class="fa fa-bookmark-o"></i>&ensp;Assignment ' + assignment_num;
             $("#assignment_title").append(assignment_title);
 
@@ -152,11 +136,30 @@ function response_to_assignment(course_name, course_id, assignment_id) {
             var assignment_description = data.description;
             var assign_description_html = '<p><i>Description:</i></p><p>' + assignment_description + '</p>';
             $("#assignment_description").append(assign_description_html);
+
+            //********* Uploaded files list part ***********
+            // manage card whose id is "#uploaded-file"
+            var file_ids_list = data.uploaded_file_dict.uni;
+            show_uploaded_files(file_ids_list);
         }
     });
     $("#assignmentCard").css("display", "block");
 }
 
+// show uploaded files list (not submitted)
+function show_uploaded_files(file_ids_list) {
+    // file_ids_list is a list of file-id that user uploaded for current assignment
+    $.ajax({
+        url: '/get_uploaded_files',
+        async: false,
+        data: {
+            'file_ids_list': file_ids_list
+        },
+        success: function(files) {
+
+        }
+    });
+}
 
 
 /**************************************
@@ -207,11 +210,6 @@ $(document).ready(function() {
         url: '/student_system/' + uni,
         async: false,
         success: function(data) {
-            // data :  [user_data, courses_data]
-            //console.log('whole data: ',data);
-            //console.log('user data: ', data[0]);
-            //console.log('courses data: ', data[1]);
-            //console.log('---------');
             var user_data = data[0];
             var user_name = user_data.name;
             var show_user_html = '<i class="fa fa-fw fa-user-o"></i>' + user_name;
@@ -240,7 +238,7 @@ $(document).ready(function() {
                 var sub_assign = "";
                 for (var assign_index in assign_list) {
                     var assignment = assign_list[assign_index]; // this is assignment id
-                    console.log('assignment: ', assignment);
+                    // console.log('assignment: ', assignment);
                     // var para = {
                     //     'course_name': tmp_course.course_name,
                     //     'course_id': tmp_course.course_id,
@@ -248,8 +246,8 @@ $(document).ready(function() {
                     // }
                     // console.log('html - onclick -- assignment_id: ', para);
                     var tmp_assign = '<li><a onclick="response_to_assignment(\'' +
-                        tmp_course.course_name + '\',\'' + tmp_course.course_id + '\',\'' +
-                        assignment +
+                        uni + '\',\'' + tmp_course.course_name + '\',\'' +
+                        tmp_course.course_id + '\',\'' + assignment +
                         '\')">' +
                         'Assignment ' + (parseInt(assign_index) + 1) +
                         '</a> </li>';
