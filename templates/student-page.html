@@ -19,136 +19,172 @@
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-<!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="#">Assignment Manage System</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <a class="navbar-brand" href="#">Assignment Manage System</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="#">
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="#">
                     <i class="fa fa-fw fa-list"></i>
                     <span class="nav-link-text">Dashboard</span>
                 </a>
-            </li>
+                </li>
 
 
 
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Assignment Pages">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#Assignment" data-parent="#exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Assignment Pages">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" id="assignment-nav" href="#Assignment" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-file-text"></i>
                     <span class="nav-link-text">Assignments</span>
                 </a>
-                <ul class="sidenav-second-level collapse" id="Assignment"></ul>
-            </li>
+                    <ul class="sidenav-second-level collapse" id="Assignment"></ul>
+                </li>
 
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Grade Pages">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" id="grade-nav" href="#Grade" data-parent="#exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Grade Pages">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" id="grade-nav" href="#Grade" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-check"></i>
                     <span class="nav-link-text">Grades</span>
                 </a>
-                <ul class="sidenav-second-level collapse" id="Grade"></ul>
-            </li>
-        </ul>
+                    <ul class="sidenav-second-level collapse" id="Grade"></ul>
+                </li>
+            </ul>
 
-        <!-- nav bar // right side -->
-        <ul class="navbar-nav sidenav-toggler">
-            <li class="nav-item">
-                <a class="nav-link text-center" id="sidenavToggler">
+            <!-- nav bar // right side -->
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
                     <i class="fa fa-fw fa-angle-left"></i>
                 </a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" name="user" id="user"><!-- user name here --></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="login.html">
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" name="user" id="user">
+                        <!-- user name here -->
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">
                     <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-
-<div class="content-wrapper">
-    <div class="container-fluid">
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="#">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item active" id="subtitle">My Dashboard</li>
-        </ol>
-
-        <div id="title-part" style="display: none">
-            <!-- title of before line -->
+                </li>
+            </ul>
         </div>
+    </nav>
 
 
-        <!-- grade card // table |||||    gradeCard    ||||| -->
-        <div class="card mb-3" id="gradeCard" style="display:none">
-            <div class="card-header" id="table-course"><!-- course name here --></div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead> <!-- table attributes-->
-                        <tr>
-                            <th>Assignment</th>
-                            <th>Score</th>
-                            <th>Comment</th>
-                        </tr>
-                        </thead>
-                        <tbody id="gradeData"><!-- grade data show here--></tbody>
-                    </table>
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active" id="subtitle">My Dashboard</li>
+            </ol>
+
+            <div id="title-part" style="display: none">
+                <!-- title of before line -->
+            </div>
+
+            <!-- Assignment card  ||  two-column format -->
+            <div id="assignmentCard">
+                <div class="row">
+                    <div class="col-lg-5" id="first-column">
+                        <div class="card mb-3" style="height:465px;">
+                            <div class="card-header" id="assignment_title">
+                                <!-- Assignment title here -->
+                            </div>
+                            <div class="card-body" id="assignment_description">
+                                <!-- Assignment description here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7" id="second-column">
+                        <!-- File List-->
+                        <div class="card mb-3" style="height:465px;">
+                            <div class="card-header">
+                                <i class="fa fa-files-o"></i>&ensp;Uploaded Files </div>
+                            <div class="card-body" id="file-submitted">
+                                <!-- File Submitted-->
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
+            <!-- End of Assignment card-->
+
+
+            <!-- grade card // table |||||    gradeCard    ||||| -->
+            <div class="card mb-3" id="gradeCard" style="display:none">
+                <div class="card-header" id="table-course">
+                    <!-- course name here -->
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <!-- table attributes-->
+                                <tr>
+                                    <th>Assignment</th>
+                                    <th>Score</th>
+                                    <th>Comment</th>
+                                </tr>
+                            </thead>
+                            <tbody id="gradeData">
+                                <!-- grade data show here-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- End of grade card // table -->
+
         </div>
-        <!-- End of grade card // table -->
-
+        <p id="userUNI" name="userUNI" style="display: none;">{{ user_uni }}</p>
     </div>
-    <p id="userUNI" name="userUNI" style="display: none;">{{ user_uni }}</p>
-</div>
 
 
-<!-- /.container-fluid-->
-<!-- /.content-wrapper-->
-<footer class="sticky-footer">
-    <div class="container">
-        <div class="text-center">
-            <small>Copyright © Your Website 2017</small>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+        <div class="container">
+            <div class="text-center">
+                <small>Copyright © Your Website 2017</small>
+            </div>
         </div>
-    </div>
-</footer>
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
     <i class="fa fa-angle-up"></i>
-</a>
+                            </a>
 
 
-<!-- custom script -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="../static/ngn-js/student.js"></script>
+    <!-- custom script -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../static/ngn-js/student.js"></script>
 
 
 
-<!-- Bootstrap core JavaScript-->
-<script src="../static/vendor/jquery/jquery.js"></script>
-<script src="../static/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-<!-- Core plugin JavaScript-->
-<script src="../static/vendor/jquery-easing/jquery.easing.js"></script>
-<!-- Page level plugin JavaScript-->
+    <!-- Bootstrap core JavaScript-->
+    <script src="../static/vendor/jquery/jquery.js"></script>
+    <script src="../static/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="../static/vendor/jquery-easing/jquery.easing.js"></script>
+    <!-- Page level plugin JavaScript-->
 
-<!-- <script src="../static/vendor/datatables/jquery.dataTables.js"></script> -->
-<script src="../static/vendor/datatables/dataTables.bootstrap4.js"></script>
-<!-- Custom scripts for all pages-->
-<script src="../static/js/sb-admin.js"></script>
-<!-- Custom scripts for this page-->
-<!--<script src="../static/js/sb-admin-datatables.js"></script> -->
+    <!-- <script src="../static/vendor/datatables/jquery.dataTables.js"></script> -->
+    <script src="../static/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="../static/js/sb-admin.js"></script>
+    <!-- Custom scripts for this page-->
+    <!--<script src="../static/js/sb-admin-datatables.js"></script> -->
 
 
 </body>

@@ -13,9 +13,11 @@ ASSIGNMENT = db['Assignment']
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def root():
     return render_template('login.html')
+
 
 @app.route('/login')
 def login():
@@ -37,6 +39,7 @@ def login():
         'uni': data['uni']
     }
     return jsonify(res)
+
 
 @app.route('/student_system/<userUNI>')
 def student(userUNI):
@@ -72,11 +75,13 @@ def student(userUNI):
     # return jsonify(courses_data)
     # # return redirect('/show_student')
 
+
 @app.route('/show_student/<userUNI>')
 def show(userUNI):
     user_uni = json.loads(userUNI)['uni']
     # print user_uni
     return render_template('student-page.html', user_uni = user_uni)
+
 
 @app.route('/get_grade')
 def get_grade():
@@ -84,8 +89,8 @@ def get_grade():
     # print para
     course_id = para.get('course_id')
     uni = para.get('uni')
-    print 'course ID: ', course_id
-    print 'UNI: ', uni
+    # print 'course ID: ', course_id
+    # print 'UNI: ', uni
 
     course_info = COURSE.find_one({'course_id':course_id})
     course_info.pop('_id')
@@ -94,7 +99,7 @@ def get_grade():
     grader_name = USER.find_one({'uni': grader_uni})['name']
 
     assignment_list = sorted(course_info['assignment_list'])
-    print 'assign list: ', assignment_list
+    # print 'assign list: ', assignment_list
     # data = []
     grade = dict()
     for assign_id in assignment_list:
@@ -110,9 +115,20 @@ def get_grade():
         'course_info': course_info,
         'grader': grader_name
     }
-    print 'data', data
+    # print 'data', data
     return jsonify(data)
 
+
+@app.route('/get_assignment')
+def get_assignment():
+    para = request.args
+    print 'get_assignment parameters: ', para
+    # course_id = para.get('course_id')
+    assignment_id = para.get('assignment_id')
+    assignment_info = ASSIGNMENT.find_one({'assignment_id': assignment_id})
+    assignment_info.pop('_id')
+    print assignment_info
+    return jsonify(assignment_info)
 
 
 if __name__ == '__main__':

@@ -4056,6 +4056,7 @@ tbody.collapse.show {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  height: 100%;
 }
 
 .card > hr {
@@ -4077,6 +4078,7 @@ tbody.collapse.show {
   -ms-flex: 1 1 auto;
       flex: 1 1 auto;
   padding: 1.25rem;
+  height: 100%;
 }
 
 .card-title {
