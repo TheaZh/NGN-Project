@@ -19,6 +19,7 @@
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
         <a class="navbar-brand" href="#">Assignment Manage System</a>
@@ -98,7 +99,7 @@
                             <div class="card-header" id="assignment_title">
                                 <!-- Assignment title here -->
                             </div>
-                            <div class="card-body" id="assignment_description" style="overflow-y: scroll;">
+                            <div class="card-body" id="assignment_description" style="overflow-y: auto;">
                                 <!-- Assignment description here -->
                             </div>
                         </div>
@@ -106,19 +107,28 @@
                             <div class="card-header" id="submitted-file">
                                 <i class="fa fa-cloud-upload"></i>&ensp;Submitted Files
                             </div>
-                            <div class="card-body" id="submitted-list" style="overflow-y: scroll;">
+                            <div class="card-body" id="submitted-list" style="overflow-y: auto;">
                                 <!-- Submitted-file list here -->
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-7" id="second-column">
-                        <!-- File List-->
+                        <!-- File List -->
                         <div class="card mb-3" style="height:465px;">
                             <div class="card-header">
-                                <i class="fa fa-files-o"></i>&ensp;Uploaded Files </div>
-                            <div class="card-body" id="uploaded-file">
-                                <!-- File Uploaded-->
+                                <i class="fa fa-files-o"></i>&ensp;Uploaded Files
+
+                            </div>
+                            <!-- Operation buttons -->
+                            <div class="mt-2 mb-1 mr-3" style="text-align: right;">
+                                <button type="button" class="btn btn-sm btn-secondary mr-2" onclick="choose_files()">Upload</button>
+                                <button type="button" class="btn btn-sm btn-primary">Submit</button>
+                            </div>
+                            <div class="card-body" id="uploaded-file" style="overflow-y: auto;">
+                                <div id="uploaded-list">
+                                    <!-- The list of File Uploaded-->
+                                </div>
                             </div>
 
                         </div>
@@ -177,6 +187,7 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="../static/ngn-js/student.js"></script>
+    <script type="text/javascript" src="../static/ngn-js/functions.js"></script>
 
 
 
