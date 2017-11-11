@@ -7,18 +7,8 @@ var uni = $("#userUNI").text();
  **************************************/
 // upload files from users disk
 function choose_files() {
-    // content of PopUp
-    var fake_popup = '<div class="card card-login mx-auto mt-5">\
-      <div class="card-header">Upload Files</div>\
-      <div class="card-body">\
-        <form>\
-        <p><input type=file name=file>\
-         <input type=submit value=Upload>\
-        </form>\
-      </div>\
-    </div>';
-    console.log(fake_popup);
-
+    // PopUp
+    $("#pop-up-div").css("display", "block");
 }
 
 
