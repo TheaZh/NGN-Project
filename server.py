@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 import json, os
 from pymongo import MongoClient
 from werkzeug.utils import secure_filename
+from gridfs import *
 
 
 # normal MongoDB
@@ -12,12 +13,12 @@ USER = db['User']
 COURSE = db['Course']
 ASSIGNMENT = db['Assignment']
 
-# # file Database - GridFS
-# GRIDFS_URI = "mongodb://assignment:assignment123@ds249575.mlab.com:49575/files-management"
-# GF = MongoClient(GRIDFS_URI)
-# FILE_DB = GF['files-management']
+# file Database - GridFS
+GRIDFS_URI = "mongodb://assignment:assignment123@ds249575.mlab.com:49575/files-management"
+GF = MongoClient(GRIDFS_URI)
+FILE_DB = GF['files-management']
 
-UPLOAD_FOLDER = '/Users/QW_Z/Desktop/NGN-Project/tmpFiles/'
+CACHE = './tmp/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
@@ -48,6 +49,7 @@ def login():
         'isGrader': data['isGrader'],
         'uni': data['uni']
     }
+    session['uni'] = data['uni']
     return jsonify(res)
 
 
@@ -86,7 +88,7 @@ def student(userUNI):
     # # return redirect('/show_student')
 
 
-@app.route('/show_student/<userUNI>')
+@app.route('/show_student/<userUNI>', methods=['POST', 'GET'])
 def show(userUNI):
     user_uni = json.loads(userUNI)['uni']
     # print user_uni
@@ -132,13 +134,16 @@ def get_grade():
 @app.route('/get_assignment')
 def get_assignment():
     para = request.args
-    print('get_assignment parameters: ', para)
+    # print('get_assignment parameters: ', para)
     # course_id = para.get('course_id')
     assignment_id = para.get('assignment_id')
+    session['assignment_id'] = assignment_id
+    # print(session['assignment_id'])
     assignment_info = ASSIGNMENT.find_one({'assignment_id': assignment_id})
     assignment_info.pop('_id')
-    print(assignment_info)
+    # print(assignment_info)
     return jsonify(assignment_info)
+
 
 
 @app.route('/get_uploaded_files')
@@ -155,32 +160,87 @@ def allowed_file(filename):
 
 @app.route('/choose_files', methods=['GET', 'POST'])
 def choose_files():
+    return False
+
+
+@app.route('/upload_files', methods=['GET', 'POST'])
+def upload_files():
+    response_data = {
+        'msg': ''
+    }
     if request.method == 'POST':
+        print('LET US UPLOAD!!!!')
         # check if the post request has the file part
         if 'file' not in request.files:
             print('No file part')
-            return redirect(request.url)
+            response_data['msg'] = 'No file part. Error!'
+
         file = request.files['file']
         # if user does not select file, browser also
         # submit a empty part without filename
         if file.filename == '':
             print('No selected file')
-            return redirect(request.url)
+            response_data['msg'] = 'Please Select a File.'
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(UPLOAD_FOLDER, filename))
-            return redirect(url_for('save_files',
-                                    filename=filename))
+            tmp_file_path = os.path.join(os.path.abspath(CACHE), filename)
+            file.save(tmp_file_path)
+            # return redirect(request.url)
+            print("UPLOADED! -- filename: ", filename)
+            response_data['msg'] = 'Successful Uploaded!'
+            # remove local tmp file
+            # os.remove(tmp_file_path)
+            files_to_GridFS(tmp_file_path, filename)
+
+    return jsonify(response_data)
 
 
-@app.route('/upload_files')
-def upload_files():
-    return False
+def files_to_GridFS(file_path, file_name):
+    cur_user_uni = session['uni']
+    cur_assignment_id = session['assignment_id']
+    user_FS_collection_name = cur_user_uni
+    # access to GridFS collection -- collection name is studetn uni
+    user_FS_collection = GridFS(FILE_DB, user_FS_collection_name)
+
+    # count the number of versions that have been already submitted to GridFS
+    version_count = 0
+    for grid_out in user_FS_collection.find({'filename':file_name}):
+        version_count = version_count + 1
+    version_count = version_count + 1
+    # put file in GridFS collection
+    file_id = ''
+    with open(file_path, 'rb') as MY_FILE:  # read as binary format
+        data = MY_FILE.read()
+        # # # # # # # # #
+        # filename = file_name
+        # version = the number of file with same name
+        # assignment_id = cur_assignment_id
+        id = user_FS_collection.put(data, filename=file_name, version = version_count, assignment_id = cur_assignment_id)
+    # get the _id of this file
+    file_id = str(id)
+    # update Assignment collection
+    assignment_info = ASSIGNMENT.find_one({'assignment_id': cur_assignment_id})
+    upload_file_dict = assignment_info['upload_file_dict']
+    # print('upload_file_dict:--', upload_file_dict)
+    if cur_user_uni not in upload_file_dict:
+        upload_file_dict[cur_user_uni] = []
+    upload_file_dict[cur_user_uni].append(file_id)
+    assignment_info['upload_file_dict'] = upload_file_dict
+    # print('assignment_info: -- ', assignment_info)
+    ASSIGNMENT.update_one({'assignment_id': cur_assignment_id},
+                          {'$set': {
+                              "upload_file_dict": upload_file_dict
+                          }})
+    assignment_info = ASSIGNMENT.find_one({'assignment_id': cur_assignment_id})
+
+
+
 
 
 
 
 if __name__ == '__main__':
+    app.secret_key = "this_is_an_NGN_project"
     app.debug = True
     app.run()
     # upload_files()

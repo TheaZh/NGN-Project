@@ -1,4 +1,7 @@
 var uni = $("#userUNI").text();
+var cur_course_id = '';
+var cur_course_name = '';
+var cur_assignment_id = '';
 
 /**************************************
  *
@@ -9,6 +12,12 @@ var uni = $("#userUNI").text();
 function choose_files() {
     // PopUp
     $("#pop-up-div").css("display", "block");
+}
+// close file choose window and reset the form
+function close_choose_file_window(){
+    $("#pop-up-div").css("display", "none");
+    $("#choose_file_form")[0].reset();
+    $("#choose_file_msg").empty();
 }
 
 
@@ -109,6 +118,8 @@ function empty_assignment_cards() {
 }
 
 function course_assignment(course_id, course_name) {
+    cur_course_id = course_id;
+    cur_course_name = course_name;
     empty_assignment_cards();
     // console.log('choose a course at Assignment Nav');
     // change subtitle and description
@@ -125,6 +136,7 @@ function response_to_assignment(uni, course_name, course_id, assignment_id) {
     course_assignment(course_id, course_name);
     mute_content_title();
     empty_assignment_cards();
+    cur_assignment_id = assignment_id;
     $.ajax({
         url: '/get_assignment',
         async: false,
@@ -148,9 +160,9 @@ function response_to_assignment(uni, course_name, course_id, assignment_id) {
 
             //********* Uploaded files list part ***********
             // manage card whose id is "#uploaded-file"
-            var file_ids_list = data.uploaded_file_dict[uni];
-            console.log('file_ids_list::::', file_ids_list);
-            show_uploaded_files(file_ids_list);
+            // var file_ids_list = data.uploaded_file_dict[uni];
+            // console.log('file_ids_list::::', file_ids_list);
+            // show_uploaded_files(file_ids_list);
         }
     });
     $("#assignmentCard").css("display", "block");

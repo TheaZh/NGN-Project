@@ -169,11 +169,16 @@
         <div class="container-fluid" id="pop-up-div">
             <div class="row flex-row flex-nowrap">
                 <div class="card card-body mt-5" id="cus-pop" style="padding-top: 10px; padding-bottom: 3px;">
-                    <p class="mb-1"><strong>Choose Files</strong></p>
+                    <p class="mb-1"><strong>Choose Files</strong>
+                        <button type="button" onclick="close_choose_file_window()" style="float:right;border: 0px;">
+                            <span class="fa fa-times"></span>
+                        </button>
+                    </p>
                     <hr class="mt-0 mb-0" />
-                    <form class="mt-3 mb-0" method=post enctype=multipart/form-data>
-                        <p><input type=file name=file class="mb-1">
-                            <input type=submit value=Upload class="mb-1 btn btn-primary btn-sm">
+                    <span class="mt-1" id='choose_file_msg' style="display:none"></span>
+                    <form id="choose_file_form" class="mt-1 mb-0" method="POST" enctype="multipart/form-data">
+                        <p><input type=file name=file class="mb-0">
+                            <input type=submit value=Upload class="mb-1 btn btn-primary btn-sm mb-0">
                     </form>
                 </div>
 

@@ -43,6 +43,37 @@ $(document).ready(function() {
         show_content_title();
     });
 
+    // ************ Upload file Popup **************
+    $("#choose_file_form").submit(function(){
+        $.ajax({
+            url: '/upload_files',
+            type: 'POST',
+            cache: false,
+            async: false,
+            data: new FormData($('#choose_file_form')[0]),
+            processData: false,
+            contentType: false,
+            success:function(res){
+                console.log(res);
+                var message = res.msg;
+                if(message == 'Please Select a File.'){
+                    console.log('= =');
+
+                    $("#choose_file_msg").empty()
+                        .css("display", "block")
+                        .append(message);
+                }
+                if(message == 'Successful Uploaded!'){
+                    close_choose_file_window();
+                    response_to_assignment(uni, cur_course_name, cur_course_id, cur_assignment_id);
+                }
+            },
+            error: function(res){
+                console.log(res);
+            }
+        });
+    });
+
 
 
     // ************ Data Fetching ****************
@@ -116,8 +147,8 @@ $(document).ready(function() {
             //console.log('Append HTML');
             $("#Assignment").append(assign_list_html);
             $("#Grade").append(grade_list_html);
-            return false;
         }
     });
+
 
 });
