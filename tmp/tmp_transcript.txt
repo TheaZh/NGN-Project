@@ -1,0 +1,175 @@
+/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7 "/Users/QW_Z/Documents/MS/3rd Semester/COMS6111_ADB/Project2/group27-proj2/app.py"
+Parameters:
+Client key      =  AIzaSyARFSgO3Kiuu3IOtEL8UwdIbrS7SiB43qo 
+Engine key      =  018258045116810257593:z1fmkqqt_di 
+Relation        =  Work_For 
+Threshold       =  0.22 
+Query           =  bill gates microsoft 
+# of Tuples     =  10
+URLs:  ['https://news.microsoft.com/exec/bill-gates/', 'https://en.wikipedia.org/wiki/Bill_Gates', 'https://www.theverge.com/2017/8/15/16148370/bill-gates-microsoft-shares-sale-2017', 'https://www.biography.com/people/bill-gates-9307520', 'http://www.telegraph.co.uk/technology/0/bill-gates/', 'https://www.cnbc.com/2017/09/25/bill-gates-microsoft-ceo-satya-nadella-talk-about-leadership.html', 'http://www.zdnet.com/article/bill-gates-stake-in-microsoft-is-now-just-1-3-percent/', 'https://www.wsj.com/articles/a-rare-joint-interview-with-microsoft-ceo-satya-nadella-and-bill-gates-1506358852', 'https://twitter.com/billgates', 'https://www.youtube.com/watch?v=rOqMawDj0LQ']
+Processing: https://news.microsoft.com/exec/bill-gates/
+ ---   Bill Gates - News Center Skip to Main Content Try Microsoft Edge A fast and secure browser that 's designed for Windows 10 No thanks Get started This site uses cookies for analytics , personalized content and ads .
+ ---   By continuing to browse this site , you agree to this use .
+ ---   Learn more Microsoft News Center Store Store home Devices Microsoft Surface PCs & tablets Xbox Virtual & mixed reality Accessories Windows phone Software & Apps Office Windows Professional software Windows apps Windows phone apps Games & Entertainment Xbox Games -LRB- disc -RRB- Xbox Games Download PC games -LRB- disc -RRB- Windows digital games Windows phone games Movies & TV Music Deals Sale Microsoft Surface deals PC deals Xbox deals More Business Students & educators Developer Gift cards Products Software & services Windows Office Free downloads & security Internet Explorer Microsoft Edge Skype OneNote OneDrive Microsoft Health MSN Bing Microsoft Groove Microsoft Movies & TV Devices & Xbox All Microsoft devices Microsoft Surface All Windows PCs & tablets PC accessories Xbox & games Microsoft Lumia All Windows phones Microsoft HoloLens For business Cloud Platform Microsoft Azure Microsoft Dynamics 365 Windows for business Office for business Skype for business Surface for business Enterprise solutions Data platform Find a solutions provider Volume licensing For developers & IT pros Develop Windows apps Microsoft Azure MSDN TechNet Visual Studio For students & educators Office for students OneNote in classroom Shop PCs & tablets perfect for students Microsoft in Education Support No results 0 News Center News Center Home Our Company Story Labs Feature Stories Official Microsoft Blog Microsoft Europe Microsoft Philanthropies Digital Crimes Unit Events Press Resources Microsoft Store Our Products Bing Cloud Computing Developer Dynamics Internet of Things Lumia Microsoft Accessories Microsoft HoloLens MSN Office & Office Servers OneDrive Outlook.com Privacy Security Skype Surface Windows Xbox Blogs & Communities Official Microsoft Blog The Fire Hose The AI Blog Microsoft on the Issues Transform Microsoft Europe Press Tools @MSFTNews Analyst Reports Executive Biographies Board of Directors Executive Speeches Microsoft CEO Facts About Microsoft Image Gallery Investor Relations Microsoft By the Numbers Press Contacts Press Releases Video & Broll Worldwide News Leadership Find photos , biographies , and speech transcripts of Microsoft executives and Board of Directors members Press Contact WE Communications Microsoft Media Relations -LRB-503-RRB- 443-7070 Home Leadership Board Members Bill Gates Bill Gates Founder and Technology Advisor William -LRB- Bill -RRB- H. Gates is founder , technology advisor and board member of Microsoft Corporation , the worldwide leader in software , services and solutions that help people and businesses realize their full potential .
+ ---   He served as chairman of the board until Feb. 4 , 2014 .
+ ---   On June 27 , 2008 , Gates transitioned out of a day-to-day role in the company to spend more time on his global health and education work at the Bill & Melinda Gates Foundation .
+ ---   He shares his thoughts about the foundation and other topics on Gates Notes , a website launched in January 2010 .
+ ---   Gates continues to serve on Microsoft 's Board of Directors and as an advisor on key development projects .
+ ---   Born on Oct. 28 , 1955 , Gates grew up in Seattle with his two sisters .
+ ---   Their father , William H. Gates II , is a Seattle attorney .
+ ---   Their late mother , Mary Gates , was a schoolteacher , University of Washington regent , and chairwoman of United Way International .
+ ---   Gates attended public elementary school and the private Lakeside School .
+ ---   There , he discovered his interest in software and began programming computers at age 13 .
+ ---   In 1973 , Gates entered Harvard University as a freshman , where he lived down the hall from Steve Ballmer .
+ ---   While at Harvard , Gates developed a version of the programming language BASIC for the first microcomputer -- the MITS Altair .
+============== EXTRACTED RELATION ==============
+Sentence:  While at Harvard , Gates developed a version of the programming language BASIC for the first microcomputer -- the MITS Altair .
+Relation Type: Work_For  | Confidence= 0.332663495404  | EntityType1= PEOPLE  | EntityValue1= Gates  | EntityType2= O  | EntityValue2= first
+============== END OF RELATION DESC ==============
+============== EXTRACTED RELATION ==============
+Sentence:  While at Harvard , Gates developed a version of the programming language BASIC for the first microcomputer -- the MITS Altair .
+Relation Type: Work_For  | Confidence= 0.340793433612  | EntityType1= O  | EntityValue1= first  | EntityType2= PEOPLE  | EntityValue2= Gates
+============== END OF RELATION DESC ==============
+ ---   In his junior year , Gates left Harvard to devote his energies to Microsoft , a company he had begun in 1975 with his childhood friend Paul Allen .
+ ---   Guided by a belief that the computer would be a valuable tool on every office desktop and in every home , they began developing software for personal computers .
+ ---   Gates ' foresight and his vision for personal computing have been central to the success of Microsoft and the software industry .
+ ---   Under Gates ' leadership , Microsoft 's mission has been to continually advance and improve software technology , and to make it easier , more cost-effective and more enjoyable for people to use computers .
+ ---   The company is committed to a long-term view , reflected in its industry-leading investment in research and development each year .
+ ---   In 1999 , Gates wrote `` Business @ the Speed of Thought , '' a book that shows how computer technology can solve business problems in fundamentally new ways .
+ ---   The book was published in 25 languages and is available in more than 60 countries .
+ ---   `` Business @ the Speed of Thought '' has received wide critical acclaim , and was listed on the best-seller lists of the `` New York Times , '' `` USA Today , '' `` The Wall Street Journal '' and on Amazon.com .
+ ---   Gates ' previous book , `` The Road Ahead , '' published in 1995 , was at the top of the `` New York Times '' bestseller list for seven weeks .
+ ---   Gates has donated the proceeds of both books to non-profit organizations that support the use of technology in education and skills development .
+ ---   In addition to his love of computers and software , Gates founded Corbis , which is developing one of the world 's largest resources of visual information -- a comprehensive digital archive of art and photography from public and private collections around the globe .
+ ---   He is also a member of the board of directors of Berkshire Hathaway Inc. , which invests in companies engaged in diverse business activities .
+ ---   Philanthropy is very important to Gates .
+ ---   He and his wife , Melinda , started a foundation in 2000 to help reduce inequities in the United States and around the world .
+ ---   The Bill & Melinda Gates Foundation supports philanthropic initiatives in the areas of global health and learning , with the hope that in the 21st century , advances in these critical areas will be available for all people .
+ ---   To learn more about the foundation , visit www.gatesfoundation.org Gates was married on Jan. 1 , 1994 , to Melinda French Gates .
+ ---   They have three children .
+ ---   Gates is an avid reader , and enjoys playing golf , tennis and bridge .
+ ---   Back to Top Photos Download photos of Bill Gates .
+ ---   web.jpg | print.jpg web.jpg | print.jpg Posts 5 key takeaways from Adobe MAX by the Women In Design team at Microsoft Get your zombie on now with Bing 's Halloween homepage ` Saturday Night Live ' cast members Colin Jost and Michael Che scheduled to appear on Oct. 30 ` Xbox Live Sessions ' ` Stranger Things ' skin pack comes to ` Minecraft ' Microsoft anti-malware solutions updated to guard against new ransomware threat , Bad Rabbit Follow us : Share this page : What 's new New Surface Pro Xbox One X Xbox One S Surface Laptop Windows 10 apps Office apps Mixer Store & Support Account profile Download Center Sales & support Returns Order tracking Store locations Support Education Microsoft in education Office for students Office 365 for schools Deals for students & educators Microsoft Azure in education Enterprise Microsoft Azure Enterprise Data platform Find a solutions provider Microsoft partner resources Microsoft AppSource Manufacturing & resources Financial services Developer Microsoft Visual Studio Windows Dev Center Microsoft Developer Network TechNet Microsoft Virtual Academy Microsoft developer program Channel 9 Office Dev Center Company Careers About Microsoft Company news Privacy at Microsoft Investors Diversity and inclusion Accessibility Security Sitemap Contact us Privacy & cookies Terms of use Trademarks About our ads © Microsoft 2017
+Relations extracted from this website:  2  (Overall:  15 )
+Processing: https://en.wikipedia.org/wiki/Bill_Gates
+ ---   Bill Gates - Wikipedia Bill Gates From Wikipedia , the free encyclopedia Jump to : navigation , search For other people named Bill Gates , see Bill Gates -LRB- disambiguation -RRB- .
+ ---   Bill Gates William H. Gates III in June 2015 Born William Henry Gates III -LRB- 1955-10-28 -RRB- October 28 , 1955 -LRB- age 62 -RRB- Seattle , Washington , US Residence Medina , Washington , US Years active 1975 -- present Net worth US$ 89.9 billion -LRB- October 2017 -RRB- -LSB- 1 -RSB- Title Technology Advisor of Microsoft Co-Chairman of the Bill & Melinda Gates Foundation CEO of Cascade Investment Chairman of Branded Entertainment Network Chairman of TerraPower Board member of Microsoft Berkshire Hathaway Spouse -LRB- s -RRB- Melinda Gates -LRB- m. 1994 -RRB- Children 3 Parent -LRB- s -RRB- William H. Gates Sr. .
+ ---   Mary Maxwell Gates Website gatesnotes .
+ ---   com Signature William Henry Gates III -LRB- born October 28 , 1955 -RRB- is an American business magnate , investor , author , philanthropist , and co-founder of the Microsoft Corporation along with Paul Allen .
+============== EXTRACTED RELATION ==============
+Sentence:  com Signature William Henry Gates III -LRB- born October 28 , 1955 -RRB- is an American business magnate , investor , author , philanthropist , and co-founder of the Microsoft Corporation along with Paul Allen .
+Relation Type: Work_For  | Confidence= 0.267987264441  | EntityType1= ORGANIZATION  | EntityValue1= Corporation  | EntityType2= PEOPLE  | EntityValue2= Allen
+============== END OF RELATION DESC ==============
+============== EXTRACTED RELATION ==============
+Sentence:  com Signature William Henry Gates III -LRB- born October 28 , 1955 -RRB- is an American business magnate , investor , author , philanthropist , and co-founder of the Microsoft Corporation along with Paul Allen .
+Relation Type: Work_For  | Confidence= 0.260221063063  | EntityType1= PEOPLE  | EntityValue1= Allen  | EntityType2= ORGANIZATION  | EntityValue2= Corporation
+============== END OF RELATION DESC ==============
+ ---   -LSB- 2 -RSB- -LSB- 3 -RSB- In 1975 , Gates and Allen launched Microsoft , which became the world 's largest PC software company .
+ ---   During his career at Microsoft , Gates held the positions of chairman , CEO and chief software architect , while also being the largest individual shareholder until May 2014 .
+ ---   -LSB- 4 -RSB- -LSB- a -RSB- Gates stepped down as chief executive officer of Microsoft in January 2000 , but he remained as chairman and created the position of chief software architect for himself .
+ ---   -LSB- 7 -RSB- In June 2006 , Gates announced that he would be transitioning from full-time work at Microsoft to part-time work and full-time work at the Bill & Melinda Gates Foundation .
+============== EXTRACTED RELATION ==============
+Sentence:  -LSB- 7 -RSB- In June 2006 , Gates announced that he would be transitioning from full-time work at Microsoft to part-time work and full-time work at the Bill & Melinda Gates Foundation .
+Relation Type: Work_For  | Confidence= 0.284700599958  | EntityType1= PEOPLE  | EntityValue1= Gates  | EntityType2= ORGANIZATION  | EntityValue2= Microsoft
+============== END OF RELATION DESC ==============
+============== EXTRACTED RELATION ==============
+Sentence:  -LSB- 7 -RSB- In June 2006 , Gates announced that he would be transitioning from full-time work at Microsoft to part-time work and full-time work at the Bill & Melinda Gates Foundation .
+Relation Type: Work_For  | Confidence= 0.292132263575  | EntityType1= ORGANIZATION  | EntityValue1= Microsoft  | EntityType2= PEOPLE  | EntityValue2= Gates
+============== END OF RELATION DESC ==============
+ ---   -LSB- 8 -RSB- He gradually transferred his duties to Ray Ozzie and Craig Mundie .
+ ---   -LSB- 9 -RSB- He stepped down as chairman of Microsoft in February 2014 and assumed a new post as technology adviser to support the newly appointed CEO Satya Nadella .
+ ---   -LSB- 10 -RSB- Gates is one of the best-known entrepreneurs of the personal computer revolution .
+ ---   He has been criticized for his business tactics , which have been considered anti-competitive .
+ ---   This opinion has been upheld by numerous court rulings .
+ ---   -LSB- 11 -RSB- Later in his career , Gates pursued a number of philanthropic endeavors .
+ ---   He donated large amounts of money to various charitable organizations and scientific research programs through the Bill & Melinda Gates Foundation , which was established in 2000 .
+ ---   Since 1987 , Gates has been included in the Forbes list of the world 's wealthiest people .
+ ---   -LSB- 12 -RSB- As of September 2017 -LSB- update -RSB- , he is the richest person in the world , with an estimated net worth of US$ 84.8 billion .
+ ---   -LSB- 1 -RSB- In 2009 , Gates and Warren Buffett founded The Giving Pledge , whereby they and other billionaires pledge to give at least half of their wealth to philanthropy .
+ ---   -LSB- 13 -RSB- The foundation works to save lives and improve global health , and is working with Rotary International to eliminate polio .
+ ---   -LSB- 14 -RSB- Contents 1 Early life 2 Microsoft 2.1 BASIC 2.2 IBM partnership 2.3 Windows 2.4 Management style 2.5 Antitrust litigation 2.6 Appearance in ads 3 Post-Microsoft 4 Personal life 4.1 Philanthropy 4.1.1 Bill and Melinda Gates Foundation 4.1.2 Personal donations 4.1.3 Criticism 4.1.4 Charity sports events 4.2 Recognition 4.3 External business ventures and investments 5 Books , films , social media and radio 5.1 Books 5.2 Documentaries 5.3 Feature films 5.4 Social media 5.5 Video and film clips 5.6 Radio 6 See also 7 Notes 8 References 8.1 Citations 8.2 Bibliography 9 Further reading 10 External links Early life Gates was born in Seattle , Washington on October 28 , 1955 .
+ ---   He is the son of William H. Gates Sr. -LSB- b -RSB- -LRB- b. 1925 -RRB- and Mary Maxwell Gates -LRB- 1929 -- 1994 -RRB- .
+============== EXTRACTED RELATION ==============
+Sentence:  He is the son of William H. Gates Sr. -LSB- b -RSB- -LRB- b. 1925 -RRB- and Mary Maxwell Gates -LRB- 1929 -- 1994 -RRB- .
+Relation Type: Work_For  | Confidence= 0.298256551619  | EntityType1= PEOPLE  | EntityValue1= Sr.  | EntityType2= PEOPLE  | EntityValue2= Gates
+============== END OF RELATION DESC ==============
+ ---   His ancestry includes English , German , Irish , and Scots-Irish .
+ ---   -LSB- 15 -RSB- -LSB- 16 -RSB- His father was a prominent lawyer , and his mother served on the board of directors for First Interstate BancSystem and the United Way .
+ ---   Gates ' maternal grandfather was JW Maxwell , a national bank president .
+ ---   Gates has one elder sister , Kristi -LRB- Kristianne -RRB- , and one younger sister , Libby .
+ ---   He is the fourth of his name in his family , but is known as William Gates III or `` Trey '' because his father had the `` II '' suffix .
+ ---   -LSB- 17 -RSB- Early on in his life , Gates ' parents had a law career in mind for him .
+ ---   -LSB- 18 -RSB- When Gates was young , his family regularly attended a church of the Congregational Christian Churches , a Protestant Reformed denomination .
+ ---   -LSB- 19 -RSB- -LSB- 20 -RSB- -LSB- 21 -RSB- The family encouraged competition ; one visitor reported that `` it did n't matter whether it was hearts or pickleball or swimming to the dock ... there was always a reward for winning and there was always a penalty for losing '' .
+ ---   -LSB- 22 -RSB- The Poker Room in Currier House at Harvard College -LSB- further explanation needed -RSB- At 13 , he enrolled in the Lakeside School , a private preparatory school .
+ ---   -LSB- 23 -RSB- When he was in the eighth grade , the Mothers ' Club at the school used proceeds from Lakeside School 's rummage sale to buy a Teletype Model 33 ASR terminal and a block of computer time on a General Electric -LRB- GE -RRB- computer for the school 's students .
+ ---   -LSB- 24 -RSB- Gates took an interest in programming the GE system in BASIC , and was excused from math classes to pursue his interest .
+ ---   He wrote his first computer program on this machine : an implementation of tic-tac-toe that allowed users to play games against the computer .
+ ---   Gates was fascinated by the machine and how it would always execute software code perfectly .
+ ---   When he reflected back on that moment , he said , `` There was just something neat about the machine . ''
+ ---   -LSB- 25 -RSB- After the Mothers Club donation was exhausted , he and other students sought time on systems including DEC PDP minicomputers .
+ ---   One of these systems was a PDP-10 belonging to Computer Center Corporation -LRB- CCC -RRB- , which banned four Lakeside students -- Gates , Paul Allen , Ric Weiland , and Kent Evans -- for the summer after it caught them exploiting bugs in the operating system to obtain free computer time .
+ ---   -LSB- 26 -RSB- -LSB- 27 -RSB- At the end of the ban , the four students offered to find bugs in CCC 's software in exchange for extra computer time .
+ ---   Rather than use the system via Teletype .
+ ---   Subsequently , Gates went to CCC 's offices and studied source code for various programs that ran on the system , including programs in Fortran , Lisp , and machine language .
+ ---   The arrangement with CCC continued until 1970 , when the company went out of business .
+ ---   The following year , Information Sciences , Inc. hired the four Lakeside students to write a payroll program in COBOL , providing them computer time and royalties .
+ ---   After his administrators became aware of his programming abilities , Gates wrote the school 's computer program to schedule students in classes .
+Steve Ballmer First Chairman ---   He modified the code so that he was placed in classes with `` a disproportionate number of interesting girls . ''
+ ---   -LSB- 28 -RSB- He later stated that `` it was hard to tear myself away from a machine at which I could so unambiguously demonstrate success . ''
+ ---   -LSB- 25 -RSB- At age 17 , Gates formed a venture with Allen , called Traf-O-Data , to make traffic counters based on the Intel 8008 processor .
+============== EXTRACTED RELATION ==============
+Sentence:  -LSB- 25 -RSB- At age 17 , Gates formed a venture with Allen , called Traf-O-Data , to make traffic counters based on the Intel 8008 processor .
+Relation Type: Work_For  | Confidence= 0.249588714746  | EntityType1= O  | EntityValue1= 17  | EntityType2= PEOPLE  | EntityValue2= Allen
+============== END OF RELATION DESC ==============
+============== EXTRACTED RELATION ==============
+Sentence:  -LSB- 25 -RSB- At age 17 , Gates formed a venture with Allen , called Traf-O-Data , to make traffic counters based on the Intel 8008 processor .
+Relation Type: Work_For  | Confidence= 0.241220685827  | EntityType1= PEOPLE  | EntityValue1= Allen  | EntityType2= O  | EntityValue2= 17
+============== END OF RELATION DESC ==============
+ ---   -LSB- 29 -RSB- In early 1973 , Bill Gates served as a congressional page in the U.S. House of Representatives .
+ ---   -LSB- 30 -RSB- Gates was a National Merit Scholar when he graduated from Lakeside School in 1973 .
+ ---   -LSB- 31 -RSB- He scored 1590 out of 1600 on the Scholastic Aptitude Tests -LRB- SAT -RRB- and enrolled at Harvard College in the autumn of 1973 .
+ ---   -LSB- 32 -RSB- -LSB- 33 -RSB- He chose a pre-law major but took mathematics and graduate level computer science courses .
+ ---   -LSB- 34 -RSB- While at Harvard , he met fellow student Steve Ballmer .
+ ---   Gates left Harvard after two years while Ballmer would stay and graduate magna cum laude .
+ ---   Years later , Ballmer succeeded Gates as Microsoft 's CEO .
+============== EXTRACTED RELATION ==============
+Sentence:  Years later , Ballmer succeeded Gates as Microsoft 's CEO .
+Relation Type: Work_For  | Confidence= 0.330281502093  | EntityType1= PEOPLE  | EntityValue1= Ballmer  | EntityType2= ORGANIZATION  | EntityValue2= Microsoft
+============== END OF RELATION DESC ==============
+ ---   He maintained that position from 2000 until his resignation from the company in 2014 .
+ ---   -LSB- 35 -RSB- In his second year , Gates devised an algorithm for pancake sorting as a solution to one of a series of unsolved problems -LSB- 36 -RSB- presented in a combinatorics class by Harry Lewis , one of his professors .
+ ---   Gates ' solution held the record as the fastest version for over thirty years ; -LSB- 36 -RSB- -LSB- 37 -RSB- its successor is faster by only one percent .
+ ---   -LSB- 36 -RSB- His solution was later formalized in a published paper in collaboration with Harvard computer scientist Christos Papadimitriou .
+ ---   -LSB- 38 -RSB- While Gates was a student at Harvard , -LSB- 39 -RSB- he did not have a definite study plan , and he spent a lot of time using the school 's computers .
+ ---   Gates remained in contact with Paul Allen , and he joined him at Honeywell during the summer of 1974 .
+ ---   -LSB- 40 -RSB- The MITS Altair 8800 was released the following year .
+ ---   The new computer was based on the Intel 8080 CPU , and Gates and Allen saw this as the opportunity to start their own computer software company .
+ ---   -LSB- 41 -RSB- Gates dropped out of Harvard at this time .
+ ---   He had talked over this decision with his parents , who were supportive of him after seeing how much their son wanted to start his own company .
+ ---   -LSB- 39 -RSB- Gates explained his decision to leave Harvard , saying '' ... if things -LSB- Microsoft -RSB- had n't worked out , I could always go back to school .
+ ---   I was officially on -LSB- a -RSB- leave -LSB- of absence -RSB- . ''
+ ---   -LSB- 42 -RSB- Microsoft Main articles : History of Microsoft and Microsoft BASIC MITS Altair 8800 Computer with 8-inch -LRB- 200 mm -RRB- floppy disk system After Gates read the January 1975 issue of Popular Electronics , which demonstrated the Altair 8800 , he contacted Micro Instrumentation and Telemetry Systems -LRB- MITS -RRB- , the creators of the new microcomputer , to inform them that he and others were working on a BASIC interpreter for the platform .
+ ---   -LSB- 43 -RSB- In reality , Gates and Allen did not have an Altair and had not written code for it ; they merely wanted to gauge MITS 's interest .
+ ---   MITS president Ed Roberts agreed to meet them for a demo , and over the course of a few weeks they developed an Altair emulator that ran on a minicomputer , and then the BASIC interpreter .
+ ---   The demonstration , held at MITS 's offices in Albuquerque , was a success and resulted in a deal with MITS to distribute the interpreter as Altair BASIC .
+ ---   Paul Allen was hired into MITS , -LSB- 44 -RSB- and Gates took a leave of absence from Harvard to work with Allen at MITS in Albuquerque in November 1975 .
+ ---   They named their partnership `` Micro-Soft '' and had their first office located in Albuquerque .
+ ---   -LSB- 44 -RSB- Within a year , the hyphen was dropped , and on November 26 , 1976 , the trade name `` Microsoft '' was registered with the Office of the Secretary of the State of New Mexico .
+ ---   -LSB- 44 -RSB- Gates never returned to Harvard to complete his studies .
+ ---   Microsoft 's Altair BASIC was popular with computer hobbyists , but Gates discovered that a pre-market copy had leaked into the community and was being widely copied and distributed .
+ ---   In February 1976 , Gates wrote an Open Letter to Hobbyists in the MITS newsletter in which he asserted that more than 90 percent of the users of Microsoft Altair BASIC had not paid Microsoft for it and by doing so the Altair `` hobby market '' was in danger of eliminating the incentive for any professional developers to produce , distribute , and maintain high-quality software .
+ ---   -LSB- 45 -RSB- This letter was unpopular with many computer hobbyists , but Gates persisted in his belief that software developers should be able to demand payment .
+ ---   Microsoft became independent of MITS in late 1976 , and it continued to develop programming language software for various systems .
+ ---   -LSB- 44 -RSB- The company moved from Albuquerque to its new home in Bellevue , Washington , on January 1 , 1979 .
+ ---   -LSB- 43 -RSB- During Microsoft 's early years , all employees had broad responsibility for the company 's business .
+ ---   Gates oversaw the business details , but continued to write code as well .
+ ---   In the first five years , Gates personally reviewed every line of code the company shipped , and often rewrote parts of it as he saw fit .
+ ---   -LSB- 46 -RSB- -LSB- unreliable source ? -RSB-
+ ---   IBM partnership IBM approached Microsoft in July 1980 in reference to an operating system for its upcoming personal computer , the IBM PC .
+ ---   -LSB- 47 -RSB- Big Blue first proposed that Microsoft write the BASIC interpreter .
+ ---   When IBM 's representatives mentioned that they needed an operating system , Gates referred them to Digital Research -LRB- DRI -RRB- , makers of the widely used CP/M operating system .
+ ---   -LSB- 48 -RSB- IBM 's discussions with Digital Research went poorly , and they did not reach a licensing agreement .
+ ---   IBM representative Jack Sams mentioned the licensing difficulties during a subsequent meeting with Gates and told him to get an acceptable operating system .
+ ---   A few weeks later , Gates proposed using 86-DOS -LRB- QDOS -RRB- , an operating system similar to CP/M that Tim Paterson of Seattle Computer Products -LRB- SCP -RRB- had made for hardware similar to the PC .
+ ---   Microsoft made a deal with SCP to become the exclusive licensing agent , and later the full owner , of 86-DOS .

@@ -189,7 +189,7 @@ function show_uploaded_files(file_ids_list) {
                 var file_html = '<label class="ml-2 form-check-label"><input class="form-check-input" type="checkbox" value='+ file_name_dict.file + '>'+ file +'</label><br>'
                 file_list_html = file_list_html + file_html;
             }
-            $("#uploaded-file").append(file_list_html);
+            $("#uploaded-file").empty().append(file_list_html);
         }
     });
 }
