@@ -3,6 +3,7 @@ import json, os
 from pymongo import MongoClient
 from werkzeug.utils import secure_filename
 from gridfs import *
+from bson.objectid import ObjectId
 
 
 # normal MongoDB
@@ -134,7 +135,7 @@ def get_grade():
 @app.route('/get_assignment')
 def get_assignment():
     para = request.args
-    # print('get_assignment parameters: ', para)
+    print('get_assignment parameters: ', para)
     # course_id = para.get('course_id')
     assignment_id = para.get('assignment_id')
     session['assignment_id'] = assignment_id
@@ -148,8 +149,23 @@ def get_assignment():
 
 @app.route('/get_uploaded_files')
 def get_uploaded_files():
-    # NOT finished Yet
-    file_ids_list = request.args.get('file_ids_list')
+    # Get file id list
+    file_ids_list = json.loads(request.args.get('file_ids_list'))
+    # access to GridFS collection -- collection name is studetn uni
+    cur_user_uni = session['uni']
+    cur_assignment_id = session['assignment_id']
+    user_FS_collection_name = cur_user_uni
+    user_FS_collection = GridFS(FILE_DB, user_FS_collection_name)
+    # build file name dict -- key: filename_version, value: file_id('_id')
+    file_name_dict = {}
+    for file_id in file_ids_list:
+        tmp_file_data = user_FS_collection.find_one({'_id': ObjectId(file_id)})
+        tmp_file_name = tmp_file_data.filename
+        tmp_file_version = tmp_file_data.version
+        file_name = tmp_file_name + '-' + str(tmp_file_version)
+        file_name_dict[file_name] = file_id
+
+    return jsonify(file_name_dict)
 
 
 def allowed_file(filename):

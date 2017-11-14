@@ -160,9 +160,12 @@ function response_to_assignment(uni, course_name, course_id, assignment_id) {
 
             //********* Uploaded files list part ***********
             // manage card whose id is "#uploaded-file"
-            // var file_ids_list = data.uploaded_file_dict[uni];
-            // console.log('file_ids_list::::', file_ids_list);
-            // show_uploaded_files(file_ids_list);
+            console.log('data:',data);
+            // console.log('cur uni:', uni);
+            console.log(data.upload_file_dict);
+            var file_ids_list = data.upload_file_dict[uni];
+            console.log('uni - file_ids_list:', uni, ' -- ', file_ids_list);
+            show_uploaded_files(file_ids_list);
         }
     });
     $("#assignmentCard").css("display", "block");
@@ -175,10 +178,18 @@ function show_uploaded_files(file_ids_list) {
         url: '/get_uploaded_files',
         async: false,
         data: {
-            'file_ids_list': file_ids_list
+            'file_ids_list': JSON.stringify(file_ids_list)
         },
-        success: function(files) {
-
+        success: function(file_name_dict) {
+            console.log('file_name_dict:', file_name_dict);
+            // file name dict -- key: filename_version, value: file_id('_id')
+            var file_list_html = '';
+            for(var file in file_name_dict){
+                console.log('file item: ', file);
+                var file_html = '<label class="ml-2 form-check-label"><input class="form-check-input" type="checkbox" value='+ file_name_dict.file + '>'+ file +'</label><br>'
+                file_list_html = file_list_html + file_html;
+            }
+            $("#uploaded-file").append(file_list_html);
         }
     });
 }
