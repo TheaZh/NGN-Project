@@ -163,7 +163,10 @@ function response_to_assignment(uni, course_name, course_id, assignment_id) {
             console.log('data:',data);
             // console.log('cur uni:', uni);
             console.log(data.upload_file_dict);
-            var file_ids_list = data.upload_file_dict[uni];
+            var file_ids_list = [];
+            if(uni in data.upload_file_dict){
+                file_ids_list = data.upload_file_dict[uni];
+            }
             console.log('uni - file_ids_list:', uni, ' -- ', file_ids_list);
             show_uploaded_files(file_ids_list);
         }
@@ -185,11 +188,38 @@ function show_uploaded_files(file_ids_list) {
             // file name dict -- key: filename_version, value: file_id('_id')
             var file_list_html = '';
             for(var file in file_name_dict){
-                console.log('file item: ', file);
-                var file_html = '<label class="ml-2 form-check-label"><input class="form-check-input" type="checkbox" value='+ file_name_dict.file + '>'+ file +'</label><br>'
+                // console.log('file item: ', file);
+                // console.log('file item: ', file_name_dict[file]);
+                console.log('file item: ', file_name_dict[file][1]);
+                // var file_html = '<label class="ml-2 form-check-label"><input class="form-check-input" type="checkbox" value='+ file_name_dict.file + '>'+ file +'</label><br>'
+
+                var file_html = '<tr>' +
+                                '<td>' + file + '</td>' +
+                                ' <td>'+ file_name_dict[file][1] + '</td>' +
+                                '<td><label class="form-check-label"><input type="checkbox" value='+ file_name_dict[file][0] + '></label>'+
+                                '</td>' +
+                                '</tr>';
+
                 file_list_html = file_list_html + file_html;
             }
-            $("#uploaded-file").empty().append(file_list_html);
+            var file_list_table =   '<form>' +
+                                    '<table class="table table-sm">'+
+                                    '<thead>'+
+                                    '<tr>'+
+                                    '<th>File Name</th>'+
+                                    '<th>Timestamp</th>'+
+                                    '<th>Submit</th>'+
+                                    '</tr>'+
+                                    '</thead>' +
+                                    '<tbody>' +
+                                    file_list_html +
+                                    '</tbody>' +
+                                    '</table>'+
+                                    '</form>';
+            if (file_list_html == ''){
+                file_list_table = file_list_table + '<p class="text-muted" style="text-align: center"><i>None</i><p>';
+            }
+            $("#uploaded-file").empty().append(file_list_table);
         }
     });
 }

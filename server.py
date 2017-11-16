@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, session
-import json, os
+import json, os, datetime, time
 from pymongo import MongoClient
 from werkzeug.utils import secure_filename
 from gridfs import *
@@ -151,6 +151,7 @@ def get_assignment():
 def get_uploaded_files():
     # Get file id list
     file_ids_list = json.loads(request.args.get('file_ids_list'))
+    print file_ids_list
     # access to GridFS collection -- collection name is studetn uni
     cur_user_uni = session['uni']
     cur_assignment_id = session['assignment_id']
@@ -158,12 +159,13 @@ def get_uploaded_files():
     user_FS_collection = GridFS(FILE_DB, user_FS_collection_name)
     # build file name dict -- key: filename_version, value: file_id('_id')
     file_name_dict = {}
-    for file_id in file_ids_list:
-        tmp_file_data = user_FS_collection.find_one({'_id': ObjectId(file_id)})
-        tmp_file_name = tmp_file_data.filename
-        tmp_file_version = tmp_file_data.version
-        file_name = tmp_file_name + '-' + str(tmp_file_version)
-        file_name_dict[file_name] = file_id
+    if file_ids_list:
+        for file_id in file_ids_list:
+            tmp_file_data = user_FS_collection.find_one({'_id': ObjectId(file_id)})
+            tmp_file_name = tmp_file_data.filename
+            tmp_file_version = tmp_file_data.version
+            file_name = tmp_file_name + '-' + str(tmp_file_version)
+            file_name_dict[file_name] = [file_id, tmp_file_data.timestamp]
 
     return jsonify(file_name_dict)
 
@@ -231,7 +233,9 @@ def files_to_GridFS(file_path, file_name):
         # filename = file_name
         # version = the number of file with same name
         # assignment_id = cur_assignment_id
-        id = user_FS_collection.put(data, filename=file_name, version = version_count, assignment_id = cur_assignment_id)
+        ts = time.time()
+        display_time = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+        id = user_FS_collection.put(data, filename=file_name, version = version_count, assignment_id = cur_assignment_id, timestamp = display_time)
     # get the _id of this file
     file_id = str(id)
     # update Assignment collection
