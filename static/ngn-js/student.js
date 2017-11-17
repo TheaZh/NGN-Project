@@ -76,7 +76,6 @@ $(document).ready(function() {
     });
 
 
-
     // ************ Data Fetching ****************
     $.ajax({
         url: '/student_system/' + uni,

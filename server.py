@@ -176,11 +176,6 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route('/choose_files', methods=['GET', 'POST'])
-def choose_files():
-    return False
-
-
 @app.route('/upload_files', methods=['GET', 'POST'])
 def upload_files():
     response_data = {
@@ -251,10 +246,56 @@ def files_to_GridFS(file_path, file_name):
                           {'$set': {
                               "upload_file_dict": upload_file_dict
                           }})
+    # assignment_info = ASSIGNMENT.find_one({'assignment_id': cur_assignment_id})
+
+
+@app.route('/submit_files')
+def submit_files():
+    submit_id_list = json.loads(request.args.get('submit_id_list'))
+    print('submit_id_list:', submit_id_list)
+    cur_user_uni = session['uni']
+    cur_assignment_id = session['assignment_id']
+    # timestamp for submission
+    ts = time.time()
+    display_time = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+    # no file chosen to submit
+    if len(submit_id_list) == 0:
+        return jsonify({'msg':'NoFile'})
+
     assignment_info = ASSIGNMENT.find_one({'assignment_id': cur_assignment_id})
+    submitted_file_dict = assignment_info['submitted_file_dict']
+    # first item is the file id list, second item is the timestamp for submission
+    new_sub_list = []
+    new_sub_list.append(submit_id_list)
+    new_sub_list.append(display_time)
+    submitted_file_dict[cur_user_uni] = new_sub_list
+    ASSIGNMENT.update_one({'assignment_id': cur_assignment_id},
+                          {'$set': {
+                              "submitted_file_dict": submitted_file_dict
+                          }})
+    print('update submit: ',ASSIGNMENT.find_one({'assignment_id': cur_assignment_id}))
+    return jsonify({'msg': 'FileSubmitted'})
 
 
-
+@app.route('/get_submitted_files')
+def get_submitted_files():
+    submitted_file_ids = json.loads(request.args.get('submitted_file_ids'))
+    print('submitted_file_ids: ', submitted_file_ids)
+    cur_user_uni = session['uni']
+    cur_assignment_id = session['assignment_id']
+    user_FS_collection_name = cur_user_uni
+    user_FS_collection = GridFS(FILE_DB, user_FS_collection_name)
+    # build file name dict -- key: filename_version, value: file_id('_id')
+    submitted_file_name_dict = {}
+    if submitted_file_ids:
+        for file_id in submitted_file_ids:
+            print('each file id submit -- ', file_id)
+            tmp_file_data = user_FS_collection.find_one({'_id': ObjectId(file_id)})
+            tmp_file_name = tmp_file_data.filename
+            tmp_file_version = tmp_file_data.version
+            file_name = tmp_file_name + '-' + str(tmp_file_version)
+            submitted_file_name_dict[file_name] = file_id
+    return jsonify(submitted_file_name_dict)
 
 
 

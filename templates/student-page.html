@@ -125,12 +125,21 @@
                         <!-- Operation buttons -->
                         <div class="mt-2 mb-1 mr-3" style="text-align: right;">
                             <button type="button" class="btn btn-sm btn-secondary mr-2" onclick="choose_files()">Upload</button>
-                            <button type="button" class="btn btn-sm btn-primary">Submit</button>
+                            <button type="button" class="btn btn-sm btn-primary" onclick="submit_files()">Submit</button>
                         </div>
                         <div class="card-body" id="uploaded-file" style="overflow-y: auto;">
-
-                                <!-- The list of File Uploaded-->
-                            
+                                <table class="table table-sm">
+                                    <thread>
+                                        <tr>
+                                            <th>File Name</th>
+                                            <th>Timestamp</th>
+                                            <th>Submit</th>
+                                        </tr>
+                                    </thread>
+                                    <tbody id="uploaded-file-table-body">
+                                        <!-- The list of File Uploaded-->
+                                    </tbody>
+                                </table>
                         </div>
 
                     </div>

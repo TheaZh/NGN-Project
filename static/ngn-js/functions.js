@@ -20,7 +20,6 @@ function close_choose_file_window(){
     $("#choose_file_msg").empty();
 }
 
-
 /**************************************
  *
  *         Grade Nav Functions
@@ -169,6 +168,14 @@ function response_to_assignment(uni, course_name, course_id, assignment_id) {
             }
             console.log('uni - file_ids_list:', uni, ' -- ', file_ids_list);
             show_uploaded_files(file_ids_list);
+            var submitted_file_ids = [];
+            var submission_timestamp = '';
+            if(uni in data.submitted_file_dict){
+                submitted_file_ids = data.submitted_file_dict[uni][0];
+                submission_timestamp = data.submitted_file_dict[uni][1];
+            }
+            console.log('uni - submitted_file_ids:', uni, ' -- ', submitted_file_ids);
+            show_submitted_files(submitted_file_ids, submission_timestamp);
         }
     });
     $("#assignmentCard").css("display", "block");
@@ -196,30 +203,70 @@ function show_uploaded_files(file_ids_list) {
                 var file_html = '<tr>' +
                                 '<td>' + file + '</td>' +
                                 ' <td>'+ file_name_dict[file][1] + '</td>' +
-                                '<td><label class="form-check-label"><input type="checkbox" value='+ file_name_dict[file][0] + '></label>'+
+                                '<td><label class="form-check-label">'+
+                                '<input name="choose-submit" type="checkbox" value='+ file_name_dict[file][0] +
+                                '></label>'+
                                 '</td>' +
                                 '</tr>';
 
                 file_list_html = file_list_html + file_html;
             }
-            var file_list_table =   '<form>' +
-                                    '<table class="table table-sm">'+
-                                    '<thead>'+
-                                    '<tr>'+
-                                    '<th>File Name</th>'+
-                                    '<th>Timestamp</th>'+
-                                    '<th>Submit</th>'+
-                                    '</tr>'+
-                                    '</thead>' +
-                                    '<tbody>' +
-                                    file_list_html +
-                                    '</tbody>' +
-                                    '</table>'+
-                                    '</form>';
-            if (file_list_html == ''){
-                file_list_table = file_list_table + '<p class="text-muted" style="text-align: center"><i>None</i><p>';
-            }
-            $("#uploaded-file").empty().append(file_list_table);
+
+            $("#uploaded-file-table-body").empty().append(file_list_html);
         }
     });
+}
+
+// show submitted files
+function show_submitted_files(submitted_file_ids, submission_timestamp){
+    console.log('submit--', submitted_file_ids);
+    if(submission_timestamp != ''){
+        $.ajax({
+            url:'/get_submitted_files',
+            data:{
+                'submitted_file_ids': JSON.stringify(submitted_file_ids)
+            },
+            success: function(submitted_file_name_dict){
+                // submitted_file_name_dict -- key: file_name, val: file_id
+                var sub_file_list_html = ''
+                var timestamp_html = '<p class="text-muted"><i>Submitted at: '+ submission_timestamp +'</i></p>';
+                for(var file_name in submitted_file_name_dict){
+                    sub_file_list_html += '<p class="mt-0 mb-0">' + file_name + '</p>';
+                }
+                sub_file_list_html = timestamp_html + sub_file_list_html;
+                $("#submitted-list").empty().append(sub_file_list_html);
+            }
+        });
+    }
+}
+
+
+// submit choson files in the "uploaded files" zone
+function submit_files(){
+    console.log('ready to submit...');
+    // document.getElementById("submitting-file").submit()
+    var chosen_file_id = document.getElementsByName("choose-submit");
+    var submit_list = []
+    for(var id in chosen_file_id){
+        if(chosen_file_id[id].checked){
+            console.log(chosen_file_id[id].value);
+            submit_list.push(chosen_file_id[id].value);
+        }
+    }
+    if(submit_list.length !=0){
+        console.log('new submit list: ', submit_list);
+        $.ajax({
+            url: '/submit_files',
+            data: {
+                'submit_id_list': JSON.stringify(submit_list)
+            },
+            success: function(msg){
+                console.log("submitted message:", msg);
+            }
+        });
+        response_to_assignment(uni, cur_course_name, cur_course_id, cur_assignment_id);
+    }
+    else{
+        console.log('no submit file chosen');
+    }
 }
