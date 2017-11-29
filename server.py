@@ -148,10 +148,10 @@ def post_grade():
     return jsonify(' ')
 
 
-@app.route('/download_file')
-def download():
-    uni = request.args.get('uni')
-    assignment_id = request.args.get('assignment_id')
+@app.route('/download_file/<uni>/<assignment_id>')
+def download(uni, assignment_id):
+    # uni = request.args.get('uni')
+    # assignment_id = request.args.get('assignment_id')
     assignment = ASSIGNMENT.find_one({'assignment_id': assignment_id})
     file_id = assignment['submitted_file_dict'][uni]
     user_file_collection = GridFS(FILE_DB, uni)

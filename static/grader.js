@@ -121,14 +121,21 @@ $(function(){
                 //         '</tr>'
                 // }
                 for (var key in submitted_file_dict) {
+                    // ToBeGradedList_html = ToBeGradedList_html + '<tr>' +
+                    //     '<td>' + key + '</td>' +
+                    //     '<td><a class="btn btn-info" href="{{ url_for(\'download_file\', uni=\'' + key + '\', assignment_id=\'' +
+                    //     g_assignment_id + '\') }}">Download</a></td>' +
+                    //     '<td><button class="btn btn-primary"' + ' onclick="set_uni(\'' + key +
+                    //     '\', \'' + g_assignment_id + '\')" data-toggle="modal" data-target="#myModal">' +
+                    //     'Grade</button></td>' +
+                    //     '</tr>'
                     ToBeGradedList_html = ToBeGradedList_html + '<tr>' +
                         '<td>' + key + '</td>' +
-                        '<td><a class="btn btn-info" href="/download_file/'+key + '/'+g_assignment_id+'">Download</a></td>' +
+                        '<td><a class="btn btn-info" href="{{ url_for(\'download_file\', uni=\''+key+'\', assignment_id=\''+g_assignment_id+'\')}}"' + '>Download</a></td>' +
                         '<td><button class="btn btn-primary"' + ' onclick="set_uni(\'' + key +
                         '\', \'' + g_assignment_id + '\')" data-toggle="modal" data-target="#myModal">' +
                         'Grade</button></td>' +
                         '</tr>';
-
                 }
 
                 key='test';
