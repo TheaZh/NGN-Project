@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Assignment Manage System</title>
+    <!-- Bootstrap core CSS-->
+    <link href="../static/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="../static/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="../static/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="../static/css/sb-admin.css" rel="stylesheet">
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+
+
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="#">Assignment Manage System</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Grading Pages">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" id="course-nav" href="#Course"
+                   data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa-file-text"></i>
+                    <span class="nav-link-text">Courses</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="Course"></ul>
+            </li>
+        </ul>
+
+        <!-- nav bar // right side -->
+        <ul class="navbar-nav sidenav-toggler">
+            <li class="nav-item">
+                <a class="nav-link text-center" id="sidenavToggler">
+                    <i class="fa fa-fw fa-angle-left"></i>
+                </a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" name="user" id="user">
+                    <!-- user name here -->
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="login.html">
+                    <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Main content-->
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div id="title-part" style="display:none">
+        </div>
+
+        <div id="myTab" style="display:none">
+            <div id="grading-assign-title"></div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a id="tab1" class="nav-link" href="#ToBeGraded-tab" role="tab" data-toggle="tab">Submitted</a>
+                </li>
+                <li class="nav-item">
+                    <a id="tab2" class="nav-link" href="#Graded-tab" role="tab" data-toggle="tab">Grade</a>
+                </li>
+            </ul>
+
+
+            <div id="myTabContent" class="tab-content">
+                <div role="tabpanel" class="tab-pane fade" id="ToBeGraded-tab">
+                    <!-- to be graded card-->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fa fa-table"></i> Submitted Assignments
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" id="ToBeGradedList" width="100%"
+                                       cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>UNI</th>
+                                        <th>File</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tb1"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="Graded-tab">
+                    <!--  graded card-->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fa fa-table"></i> Grade
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" id="GradedList" width="100%"
+                                       cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>UNI</th>
+                                        <th>Grade</th>
+                                        <th>Comment</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tb2"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Submit Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Please grade</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="myForm" target="nm_iframe">
+                        <fieldset class="form-group">
+                            <label for="formGradeGrade">Grade</label>
+                            <input type="text" name="grade" class="form-control" id="formGrade"
+                                   placeholder="Enter grade">
+                        </fieldset>
+
+                        <input type="hidden" name="uni" class="form-control" id="formUni">
+                        <input type="hidden" name="assignment" class="form-control" id="formAssignment">
+
+                        <fieldset class="form-group">
+                            <label for="formComment">Comment</label>
+                            <textarea name="comment" class="form-control" id="formComment" rows="3"></textarea>
+                        </fieldset>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal-->
+    <div class="modal fade" id="success_modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Success!</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Grade has been submitted successfully!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Failure Modal-->
+    <div class="modal fade" id="fail_modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Fail!</h4>
+                    <button type="button" class="close" data-dismiss="modal" onclick="$('#myModal').modal('show')" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Something went wrong, please submit again!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <p id="userUNI" style="display: none;">{{ user_uni }}</p>
+</div>
+
+
+<!-- /.container-fluid-->
+<!-- /.content-wrapper-->
+<footer class="sticky-footer">
+    <div class="container">
+        <div class="text-center">
+            <small>Copyright © Your Website 2017</small>
+        </div>
+    </div>
+</footer>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+</a>
+
+
+<!-- custom script -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../static/ngn-js/grader.js"></script>
+<script type="text/javascript" src="../static/ngn-js/functions.js"></script>
+
+
+<!-- Bootstrap core JavaScript-->
+<script src="../static/vendor/jquery/jquery.js"></script>
+<script src="../static/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="../static/vendor/jquery-easing/jquery.easing.js"></script>
+<!-- Page level plugin JavaScript-->
+<script src="../static/vendor/datatables/jquery.dataTables.js"></script>
+<script src="../static/vendor/datatables/dataTables.bootstrap4.js"></script>
+<!-- Custom scripts for all pages-->
+<script src="../static/js/sb-admin.js"></script>
+<!-- Custom scripts for this page-->
+<!--script src="../static/js/sb-admin-datatables.js"-->
+
+
+</body>
+
+</html>

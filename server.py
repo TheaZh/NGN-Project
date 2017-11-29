@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, session
-import json, os, datetime, time
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session, send_from_directory
+import json, os, datetime, time, sys
 from pymongo import MongoClient
 from werkzeug.utils import secure_filename
 from gridfs import *
@@ -89,11 +89,82 @@ def student(userUNI):
     # # return redirect('/show_student')
 
 
+@app.route('/grader_system')
+def grader():
+    user_data = USER.find_one({'uni': session['uni']})
+    user_data.pop('_id')
+    # print 'user_data ---', user_data
+
+    courses_list = user_data['course_list']
+    courses_data = []
+    for one in courses_list:
+        # one == course_id
+        tmp_course_data = COURSE.find_one({'course_id': one})
+        tmp_course_data.pop('_id')
+        courses_data.append(tmp_course_data)
+    # print 'all course -- ', courses_data
+    user_course = [user_data, courses_data]
+    return jsonify(user_course)
+
+
+@app.route('/grader_view')
+def grader_view():
+    assignment = ASSIGNMENT.find_one({'assignment_id': request.args.get('assignment_id')})
+    grade_dict = assignment['grade_dict']
+    return jsonify(grade_dict)
+
+
 @app.route('/show_student/<userUNI>', methods=['POST', 'GET'])
 def show(userUNI):
     user_uni = json.loads(userUNI)['uni']
     # print user_uni
     return render_template('student-page.html', user_uni=user_uni)
+
+
+@app.route('/show_grader')
+def show_grader():
+    return render_template('grader-page.html', user_uni=session['uni'])
+
+
+@app.route('/post')
+def post_grade():
+    grade = []
+    grade_dict = {}
+    grade.append(request.args.get('grade'))
+    grade.append(request.args.get('comment'))
+    grade_dict[request.args.get('uni')] = grade
+    # print grade_dict
+    # print request.args.get('assignment_id')
+    # print ASSIGNMENT.find_one({'assignment_id': request.args.get('assignment_id')})
+    ASSIGNMENT.update_one(
+        {'assignment_id': request.args.get('assignment_id')},
+        {
+            "$set": {
+                'grade_dict': grade_dict
+            }
+        }
+    )
+    # print ASSIGNMENT.find_one({'assignment_id': request.args.get('assignment_id')})
+    return jsonify(' ')
+
+
+@app.route('/download_file')
+def download():
+    uni = request.args.get('uni')
+    assignment_id = request.args.get('assignment_id')
+    assignment = ASSIGNMENT.find_one({'assignment_id': assignment_id})
+    file_id = assignment['submitted_file_dict'][uni]
+    user_file_collection = GridFS(FILE_DB, uni)
+    os.chdir(sys.path[0])
+    if not os.path.exists("./tmp/download"):
+        os.mkdir("./tmp/download")
+    file_db = user_file_collection.get(ObjectId(file_id[0][0]))
+    file_path = os.path.join("./tmp/download", file_db.filename)
+    file_io = open(file_path, "wb")
+    file_io.write(file_db.read())
+    file_io.close()
+    print("Success")
+    return send_from_directory("./tmp/download", file_db.filename, as_attachment=True)
 
 
 @app.route('/get_grade')

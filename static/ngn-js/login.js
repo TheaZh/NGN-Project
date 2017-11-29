@@ -39,6 +39,9 @@ $( document ).ready(function() {
                     // console.log('redirect')
 
                 }
+                else{
+                    location.href = "/show_grader";
+                }
             },
             error: function(error) {
                 console.log('Error!! ',JSON.stringify(error));
