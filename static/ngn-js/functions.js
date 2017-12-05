@@ -53,11 +53,11 @@ function response_to_grade(course_id, uni) {
 
             // grade is a dictionary -- 'assign_id' : [grade, comment]
             var grade = data.grade;
-            console.log("Grade:", grade);
+            //console.log("Grade:", grade);
             var table_body = "";
             for (var key in grade) {
                 var assign_id = key;
-                console.log(grade[assign_id]);
+                //console.log(grade[assign_id]);
                 if (grade[assign_id].length <=0) {
                     var this_grade = 'None';
                     var this_comment = 'None';
@@ -65,8 +65,8 @@ function response_to_grade(course_id, uni) {
                     var this_grade = grade[assign_id][0];
                     var this_comment = grade[assign_id][1];
                 }
-                console.log('This Grade:', this_grade);
-                console.log('This comment:', this_comment);
+                //console.log('This Grade:', this_grade);
+                //console.log('This comment:', this_comment);
                 var assign_number = "Assignment" + assign_id.split("_A")[1];
                 var html = '<tr>' +
                     '<td>' + assign_number + '</td>' +
@@ -163,14 +163,14 @@ function response_to_assignment(uni, course_name, course_id, assignment_id) {
 
             //********* Uploaded files list part ***********
             // manage card whose id is "#uploaded-file"
-            console.log('data:',data);
-            // console.log('cur uni:', uni);
-            console.log(data.upload_file_dict);
+            //console.log('data:',data);
+            // //console.log('cur uni:', uni);
+            //console.log(data.upload_file_dict);
             var file_ids_list = [];
             if(uni in data.upload_file_dict){
                 file_ids_list = data.upload_file_dict[uni];
             }
-            console.log('uni - file_ids_list:', uni, ' -- ', file_ids_list);
+            //console.log('uni - file_ids_list:', uni, ' -- ', file_ids_list);
             show_uploaded_files(file_ids_list);
             var submitted_file_ids = [];
             var submission_timestamp = '';
@@ -178,7 +178,7 @@ function response_to_assignment(uni, course_name, course_id, assignment_id) {
                 submitted_file_ids = data.submitted_file_dict[uni][0];
                 submission_timestamp = data.submitted_file_dict[uni][1];
             }
-            console.log('uni - submitted_file_ids:', uni, ' -- ', submitted_file_ids);
+            // console.log('uni - submitted_file_ids:', uni, ' -- ', submitted_file_ids);
             show_submitted_files(submitted_file_ids, submission_timestamp);
         }
     });
@@ -195,13 +195,13 @@ function show_uploaded_files(file_ids_list) {
             'file_ids_list': JSON.stringify(file_ids_list)
         },
         success: function(file_name_dict) {
-            console.log('file_name_dict:', file_name_dict);
+            // console.log('file_name_dict:', file_name_dict);
             // file name dict -- key: filename_version, value: file_id('_id')
             var file_list_html = '';
             for(var file in file_name_dict){
                 // console.log('file item: ', file);
                 // console.log('file item: ', file_name_dict[file]);
-                console.log('file item: ', file_name_dict[file][1]);
+                // console.log('file item: ', file_name_dict[file][1]);
                 // var file_html = '<label class="ml-2 form-check-label"><input class="form-check-input" type="checkbox" value='+ file_name_dict.file + '>'+ file +'</label><br>'
 
                 var file_html = '<tr>' +
@@ -223,7 +223,8 @@ function show_uploaded_files(file_ids_list) {
 
 // show submitted files
 function show_submitted_files(submitted_file_ids, submission_timestamp){
-    console.log('submit--', submitted_file_ids);
+    //console.log('submit--', submission_timestamp);
+    $("#submitted-list").empty();
     if(submission_timestamp != ''){
         $.ajax({
             url:'/get_submitted_files',
@@ -232,6 +233,7 @@ function show_submitted_files(submitted_file_ids, submission_timestamp){
             },
             success: function(submitted_file_name_dict){
                 // submitted_file_name_dict -- key: file_name, val: file_id
+                //console.log('submitted_file_name_dict:',submitted_file_name_dict);
                 var sub_file_list_html = ''
                 var timestamp_html = '<p class="text-muted"><i>Submitted at: '+ submission_timestamp +'</i></p>';
                 for(var file_name in submitted_file_name_dict){
@@ -247,30 +249,32 @@ function show_submitted_files(submitted_file_ids, submission_timestamp){
 
 // submit choson files in the "uploaded files" zone
 function submit_files(){
-    console.log('ready to submit...');
+    //console.log('ready to submit...');
     // document.getElementById("submitting-file").submit()
     var chosen_file_id = document.getElementsByName("choose-submit");
     var submit_list = []
     for(var id in chosen_file_id){
         if(chosen_file_id[id].checked){
-            console.log(chosen_file_id[id].value);
+            //console.log(chosen_file_id[id].value);
             submit_list.push(chosen_file_id[id].value);
         }
     }
     if(submit_list.length !=0){
-        console.log('new submit list: ', submit_list);
+        //console.log('new submit list: ', submit_list);
         $.ajax({
             url: '/submit_files',
             data: {
                 'submit_id_list': JSON.stringify(submit_list)
             },
             success: function(msg){
-                console.log("submitted message:", msg);
+                //console.log("submitted message:", msg);
             }
         });
         response_to_assignment(uni, cur_course_name, cur_course_id, cur_assignment_id);
     }
     else{
-        console.log('no submit file chosen');
+        //console.log('no submit file chosen');
     }
 }
+
+// delete uploaded files
