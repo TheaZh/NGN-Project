@@ -175,7 +175,7 @@
         <!-- End of grade card // table -->
 
         <!-- Choose File Popup Starts Here-->
-        <div class="container-fluid" id="pop-up-div">
+        <!-- <div class="container-fluid" id="pop-up-div">
             <div class="row flex-row flex-nowrap">
                 <div class="card card-body mt-5" id="cus-pop" style="padding-top: 10px; padding-bottom: 3px;">
                     <p class="mb-1"><strong>Choose Files</strong>
@@ -191,6 +191,27 @@
                     </form>
                 </div>
 
+            </div>
+        </div> -->
+
+        <div class="modal fade" id="pop-up-div-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Please Choose File</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="choose_file_form" class="mt-1 mb-0" method="POST" enctype="multipart/form-data">
+                            <p><input type=file name=file class="mb-0">
+                                <input type=submit value=Upload class="mb-1 btn btn-primary btn-sm mb-0">
+                        </form>
+                        <span class="mt-0" id='choose_file_msg' style="display:none"><i></i></span>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Choose File Popup Ends Here -->
