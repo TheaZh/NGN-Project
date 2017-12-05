@@ -53,16 +53,20 @@ function response_to_grade(course_id, uni) {
 
             // grade is a dictionary -- 'assign_id' : [grade, comment]
             var grade = data.grade;
+            console.log("Grade:", grade);
             var table_body = "";
             for (var key in grade) {
                 var assign_id = key;
-                if (grade.assign_id == null) {
+                console.log(grade[assign_id]);
+                if (grade[assign_id].length <=0) {
                     var this_grade = 'None';
                     var this_comment = 'None';
                 } else {
-                    var this_grade = grade.assign_id[0];
-                    var this_comment = grade.assign_id[1];
+                    var this_grade = grade[assign_id][0];
+                    var this_comment = grade[assign_id][1];
                 }
+                console.log('This Grade:', this_grade);
+                console.log('This comment:', this_comment);
                 var assign_number = "Assignment" + assign_id.split("_A")[1];
                 var html = '<tr>' +
                     '<td>' + assign_number + '</td>' +
@@ -202,7 +206,7 @@ function show_uploaded_files(file_ids_list) {
 
                 var file_html = '<tr>' +
                                 '<td>' + file + '</td>' +
-                                ' <td>'+ file_name_dict[file][1] + '</td>' +
+                                ' <td class="text-muted"><i>'+ file_name_dict[file][1] + '</i></td>' +
                                 '<td><label class="form-check-label">'+
                                 '<input name="choose-submit" type="checkbox" value='+ file_name_dict[file][0] +
                                 '></label>'+
