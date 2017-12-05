@@ -23,6 +23,7 @@ $( document ).ready(function() {
                     if(key == 'error_msg'){ // no such user or wrong password
                         console.log("ERROR")
                         $("#error_msg").html(result.error_msg);
+                        return ;
                     }
                 }
 

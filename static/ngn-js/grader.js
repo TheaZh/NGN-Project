@@ -122,9 +122,9 @@ $(function(){
                 // }
                 for (var key in submitted_file_dict) {
                     ToBeGradedList_html = ToBeGradedList_html + '<tr>' +
-                        '<td>' + key + '</td>' +
-                        '<td><a class="btn btn-info" href="/download_file/'+key + '/'+g_assignment_id+'">Download</a></td>' +
-                        '<td><button class="btn btn-primary"' + ' onclick="set_uni(\'' + key +
+                        '<td><b>' + key + '</b></td>' +
+                        '<td><a class="btn mt-0 btn-sm btn-info" href="/download_file/'+key + '/'+g_assignment_id+'">Download</a></td>' +
+                        '<td><button class="btn mt-0 btn-sm btn-primary"' + ' onclick="set_uni(\'' + key +
                         '\', \'' + g_assignment_id + '\')" data-toggle="modal" data-target="#myModal">' +
                         'Grade</button></td>' +
                         '</tr>';
@@ -132,9 +132,7 @@ $(function(){
                 }
 
                 key='test';
-                $('#tb1').append(ToBeGradedList_html).append('<tr><td>test</td>' + '<td>link</td>' +
-                    '<td><button class="btn btn-primary"' + ' onclick="set_uni(\'' + key
-                    + '\',\'' + g_assignment_id + '\')" data-toggle="modal" data-target="#myModal">' + 'Grade</button></td></tr>');
+                $('#tb1').append(ToBeGradedList_html);
 
                 // build datatable
                 $('#ToBeGradedList').dataTable({
