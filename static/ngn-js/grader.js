@@ -199,7 +199,8 @@ function response_to_grader(assignment_id) {
     var course_name = assignment_id.split('_')[0] + '  Assignment';
     var assignment_num = assignment_id.split("_A")[1];
     var assignment_title = '<i class="fa fa-bookmark-o"></i>&ensp; ' + course_name + ' ' + assignment_num;
-    $('#grading-assign-title').empty().append(assignment_title);
+    // $('#grading-assign-title').empty().append(assignment_title);
+    $("#subtitle").text("Grade  /   " + course_name + " " + assignment_num);
     $('#myTab').css('display', 'block');
 
     // manually set a 'click' event

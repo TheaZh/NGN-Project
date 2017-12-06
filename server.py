@@ -369,6 +369,39 @@ def get_submitted_files():
     return jsonify(submitted_file_name_dict)
 
 
+@app.route('/delete_files')
+def delete_files():
+    delete_id_list = json.loads(request.args.get('delete_id_list'))
+    print('Delete:', delete_id_list)
+
+    cur_assignment_id = session['assignment_id']
+    cur_user_uni = session['uni']
+    user_FS_collection_name = cur_user_uni
+    user_FS_collection = GridFS(FILE_DB, user_FS_collection_name)
+
+    assignment_info = ASSIGNMENT.find_one({'assignment_id': cur_assignment_id})
+    upload_file_dict = assignment_info['upload_file_dict']
+    submitted_file_dict = assignment_info['submitted_file_dict']
+    cur_user_submitted = []
+    if cur_user_uni in submitted_file_dict:
+        cur_user_submitted = submitted_file_dict[cur_user_uni][0]
+        print 'cur_user_submitted: ', cur_user_submitted
+    msg = ''
+    for delete_id in delete_id_list:
+        if delete_id in cur_user_submitted:
+            msg = 'Some files cannot be deleted, because they have been already submitted.'
+            print msg
+            print 'Skipped ----- ', delete_id
+            continue
+        upload_file_dict[cur_user_uni].remove(delete_id)
+        user_FS_collection.delete(ObjectId(delete_id))
+        print 'Deleted ---- ', delete_id
+    ASSIGNMENT.update_one({'assignment_id': cur_assignment_id},
+                          {'$set': {
+                              "upload_file_dict": upload_file_dict
+                          }})
+    return jsonify({'msg': msg})
+
 
 
 if __name__ == '__main__':

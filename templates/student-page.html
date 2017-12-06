@@ -30,15 +30,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="#">
-                    <i class="fa fa-fw fa-list"></i>
-                    <span class="nav-link-text">Dashboard</span>
-                </a>
-            </li>
-
-
-
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Assignment Pages">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" id="assignment-nav" href="#Assignment" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-file-text"></i>
@@ -82,10 +73,10 @@
     <div class="container-fluid">
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="#">Dashboard</a>
+            <li class="breadcrumb-item active">
+                {{ user_uni }}
             </li>
-            <li class="breadcrumb-item active" id="subtitle">My Dashboard</li>
+            <li class="breadcrumb-item active" id="subtitle"></li>
         </ol>
 
         <div id="title-part" style="display: none">
@@ -123,10 +114,10 @@
 
                         </div>
                         <!-- Operation buttons -->
-                        <div class="mt-2 mb-1 mr-3" style="text-align: right;">
+                        <div class="mt-3 mb-1 mr-3" style="text-align: right;">
                             <button type="button" class="btn btn-sm btn-success mr-2" onclick="submit_files()">Submit</button>
                             <button type="button" class="btn btn-sm btn-primary mr-2" data-toggle="modal" data-target="#pop-up-div-1">Upload</button>
-                            <button type="button" class="btn btn-sm btn-Danger" onclick="delete_files()">Delete</button>
+                            <button type="button" class="btn btn-sm btn-danger" onclick="delete_files() " data-toggle="modal" data-target="#pop-up-div-2">Delete</button>
                         </div>
                         <div class="card-body" id="uploaded-file" style="overflow-y: auto;">
                                 <table class="table table-sm">
@@ -217,6 +208,21 @@
         </div>
         <!-- Choose File Popup Ends Here -->
 
+        <!-- Delete file span -->
+        <div class="modal fade" id="pop-up-div-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <div id='delete_file_span'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of delete file span -->
 
     </div>
     <p id="userUNI" name="userUNI" style="display: none;">{{ user_uni }}</p>

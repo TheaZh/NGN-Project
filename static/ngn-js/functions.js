@@ -8,11 +8,6 @@ var cur_assignment_id = '';
  *     Files operation Functions
  *
  **************************************/
-// upload files from users disk
-function choose_files() {
-    // PopUp
-    $("#pop-up-div").css("display", "block");
-}
 // close file choose window and reset the form
 function close_choose_file_window(){
     $("#pop-up-div").css("display", "none");
@@ -278,3 +273,40 @@ function submit_files(){
 }
 
 // delete uploaded files
+function delete_files(){
+    var chosen_file_id = document.getElementsByName("choose-submit");
+    var delete_list = []
+    for(var id in chosen_file_id){
+        if(chosen_file_id[id].checked){
+            //console.log(chosen_file_id[id].value);
+            delete_list.push(chosen_file_id[id].value);
+        }
+    }
+    if(delete_list.length !=0){
+        //console.log('new submit list: ', submit_list);
+        $.ajax({
+            url: '/delete_files',
+            data: {
+                'delete_id_list': JSON.stringify(delete_list)
+            },
+            success: function(msg){
+                console.log("submitted message:", msg);
+                message = ''
+                if(msg.msg.length <= 0){
+                    // delete successfully
+                    message = 'Deleted selected files!';
+                    console.log(message);
+                }
+                else{
+                    message = msg.msg;
+                    console.log(message);
+                }
+                $("#delete_file_span").empty().append(message);
+            }
+        });
+        response_to_assignment(uni, cur_course_name, cur_course_id, cur_assignment_id);
+    }
+    else{
+        $("#delete_file_span").empty().append('No File Choosen!');
+    }
+}
