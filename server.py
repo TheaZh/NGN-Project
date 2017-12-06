@@ -72,28 +72,12 @@ def student(userUNI):
     # print 'all course -- ', courses_data
     user_course = [user_data, courses_data]
     return jsonify(user_course)
-    # data = request.get_data()
-    # print data
-    # data = request.args.get('student_data')
-    # student_data = json.loads(data)
-    # course_list = student_data['course_list']
-    # # print course_list
-    # course = db['Course']
-    # courses_data = []
-    # for course_id in course_list:
-    #     cour = course.find_one({'course_id': course_id})
-    #     cour.pop('_id')
-    #     courses_data.append(cour)
-    # # print courses_data
-    # return jsonify(courses_data)
-    # # return redirect('/show_student')
 
 
 @app.route('/grader_system')
 def grader():
     user_data = USER.find_one({'uni': session['uni']})
     user_data.pop('_id')
-    # print 'user_data ---', user_data
 
     courses_list = user_data['course_list']
     courses_data = []
@@ -102,7 +86,7 @@ def grader():
         tmp_course_data = COURSE.find_one({'course_id': one})
         tmp_course_data.pop('_id')
         courses_data.append(tmp_course_data)
-    # print 'all course -- ', courses_data
+
     user_course = [user_data, courses_data]
     return jsonify(user_course)
 
@@ -133,9 +117,7 @@ def post_grade():
     grade.append(request.args.get('grade'))
     grade.append(request.args.get('comment'))
     grade_dict[request.args.get('uni')] = grade
-    # print grade_dict
-    # print request.args.get('assignment_id')
-    # print ASSIGNMENT.find_one({'assignment_id': request.args.get('assignment_id')})
+
     ASSIGNMENT.update_one(
         {'assignment_id': request.args.get('assignment_id')},
         {
@@ -144,7 +126,7 @@ def post_grade():
             }
         }
     )
-    # print ASSIGNMENT.find_one({'assignment_id': request.args.get('assignment_id')})
+
     return jsonify(' ')
 
 
@@ -170,11 +152,9 @@ def download(uni, assignment_id):
 @app.route('/get_grade')
 def get_grade():
     para = request.args
-    # print para
+
     course_id = para.get('course_id')
     uni = para.get('uni')
-    # print 'course ID: ', course_id
-    # print 'UNI: ', uni
 
     course_info = COURSE.find_one({'course_id': course_id})
     course_info.pop('_id')
@@ -317,7 +297,6 @@ def files_to_GridFS(file_path, file_name):
                           {'$set': {
                               "upload_file_dict": upload_file_dict
                           }})
-    # assignment_info = ASSIGNMENT.find_one({'assignment_id': cur_assignment_id})
 
 
 @app.route('/submit_files')
@@ -408,4 +387,3 @@ if __name__ == '__main__':
     app.secret_key = "this_is_an_NGN_project"
     app.debug = True
     app.run()
-    # upload_files()
