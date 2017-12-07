@@ -1,6 +1,14 @@
 from pymongo import MongoClient
 from Course import Course
-
+'''
+assignment = {
+        'assignment_id': assignment_id,
+        'description': description,
+        'submitted_file_dict': {},
+        'upload_file_dict':{},
+        'grade_dict': {}
+        }
+'''
 class Assignment:
     def __init__(self):
         self.mongo_uri = "mongodb://assignment:assignment123@ds161873.mlab.com:61873/assignment-management-system"

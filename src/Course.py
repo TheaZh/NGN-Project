@@ -15,6 +15,16 @@ from pymongo import MongoClient
     "grader_id": "xz1332"
 }
 
+
+course = {
+    'course_id' : course_id,
+    'course_name': course_name,
+    'assignment_list': assignment_list,
+    'grader_id': grader_id
+         }
+
+
+
 '''
 
 class Course:
@@ -86,4 +96,3 @@ if __name__ == '__main__':
     course = Course()
     course.insert_many_courses(course_data)
     course.close_DB()
-
