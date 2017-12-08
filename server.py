@@ -113,16 +113,17 @@ def show_grader():
 @app.route('/post')
 def post_grade():
     grade = []
-    grade_dict = {}
     grade.append(request.args.get('grade'))
     grade.append(request.args.get('comment'))
-    grade_dict[request.args.get('uni')] = grade
+    assignment = ASSIGNMENT.find_one({'assignment_id': request.args.get('assignment_id')})
+    last_grade = assignment['grade_dict']
+    last_grade[request.args.get('uni')] = grade
 
     ASSIGNMENT.update_one(
         {'assignment_id': request.args.get('assignment_id')},
         {
             "$set": {
-                'grade_dict': grade_dict
+                'grade_dict': last_grade
             }
         }
     )
