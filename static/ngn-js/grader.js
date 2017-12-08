@@ -62,7 +62,7 @@ $(function () {
                         '</a></li>';
                     sub_assign = sub_assign + tmp_assign;
                 }
-                sub_assign += '<li><a onclick="conform_required(\'' + tmp_course['course_id'] + '\')">' +
+                sub_assign += '<li><a onclick="confirm_required(\'' + tmp_course['course_id'] + '\')">' +
                     'Add New</a></li>';
                 // third level nav -- assignment list under course nav
                 var assi_html = '<ul class="sidenav-third-level collapse" id="course' + index + '">' + sub_assign + '</ul>';
@@ -179,8 +179,13 @@ $(function () {
         });
     });
 
-    // conform add assignment
-    $('#conformAdd').click(function () {
+    // confirm add assignment
+    $('#confirmAdd').click(function () {
+
+        if($('#description').val()===''){
+            $('#description-span').css("display", "block");
+            return ;
+        }
 
         $.ajax({
             url: '/add_assignment',
@@ -250,7 +255,8 @@ function download(uni, assignment_id) {
     });
 }
 
-function conform_required(course_id) {
-    $('#conform_modal').modal('show');
+function confirm_required(course_id) {
+    $('#confirm_modal').modal('show');
     $('#hidden_course_id').text(course_id);
+
 }

@@ -212,8 +212,8 @@
         </div>
     </div>
 
-    <!-- Conform Modal-->
-    <div class="modal fade" id="conform_modal">
+    <!-- Confirm Modal-->
+    <div class="modal fade" id="confirm_modal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -224,13 +224,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Do you really want to add a new assignment?</p>
+                    <span class="mt-1 mb-4">Click Publish button to add a new assignment.</span>
+                    <span id='description-span' class="text-muted mb-2" style="display:none"><i>Please input assignment description.</i></span>
+                    <p></p>
                     <p>Description: <input type="text" id="description"></p>
                     <p id="hidden_course_id" style="display: none;"></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" id="conformAdd" class="btn btn-primary">OK</button>
+                    <button type="button" id="confirmAdd" class="btn btn-primary">Publish</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
