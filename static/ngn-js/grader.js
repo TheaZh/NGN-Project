@@ -3,89 +3,91 @@
  */
 
 // set global assignment_id
-var g_assignment_id='';
+var g_assignment_id = '';
 
 
-$(function(){
-    var uni=$("#userUNI").text();
+$(function () {
+    var uni = $("#userUNI").text();
     console.log(uni);
     var description = '<br /><br /><p style="text-align: center"><i><b>' +
-            'Select a course in the sidebar to grade assignments.' +
-            '</b></i></p>';
+        'Select a course in the sidebar to grade assignments.' +
+        '</b></i></p>';
     $('#title-part').append(description).css('display', 'block');
 
 
     // data fetching & builder nav bar
     $.ajax({
-            url: '/grader_system',
-            async: false,
-            success: function (data) {
-                var user_data = data[0];
-                var user_name = user_data.name;
-                var show_user_html = '<i class="fa fa-fw fa-user-o"></i>' + user_name;
+        url: '/grader_system',
+        async: false,
+        success: function (data) {
+            var user_data = data[0];
+            var user_name = user_data.name;
+            var show_user_html = '<i class="fa fa-fw fa-user-o"></i>' + user_name;
 
-                // show user name
-                $("#user").empty();
-                $("#user").append(show_user_html);
+            // show user name
+            $("#user").empty();
+            $("#user").append(show_user_html);
 
-                // data=[user_data, course_data]
-                var course_data = data[1];
-                var assign_list_html = "";
-                console.log('course_data:', course_data);
+            // data=[user_data, course_data]
+            var course_data = data[1];
+            var assign_list_html = "";
+            console.log('course_data:', course_data);
 
-                // ****** Build Sidebar ********
-                for (var index in course_data) {
-                    /*
-                     *  tmp_course -----> current course info from database
-                     */
-                    var tmp_course = course_data[index];
-                    console.log('index: ', index);
-                    //console.log('course: ', tmp_course);
-                    // sort assignment list --> start from assignment 1
-                    var assign_list = tmp_course['assignment_list'].sort();
-                    console.log('assign.list: ', assign_list);
+            // ****** Build Sidebar ********
+            for (var index in course_data) {
+                /*
+                 *  tmp_course -----> current course info from database
+                 */
+                var tmp_course = course_data[index];
+                console.log('index: ', index);
+                //console.log('course: ', tmp_course);
+                // sort assignment list --> start from assignment 1
+                var assign_list = tmp_course['assignment_list'].sort();
+                console.log('assign.list: ', assign_list);
 
 
-                    // for Assignments
-                    var sub_assign = "";
-                    for (var assign_index in assign_list) {
-                        var assignment = assign_list[assign_index]; // this is assignment_id
-                        // console.log('assignment: ', assignment);
-                        // var para = {
-                        //     'course_name': tmp_course.course_name,
-                        //     'course_id': tmp_course.course_id,
-                        //     'assignment': assignment
-                        // }
-                        // console.log('html - onclick -- assignment_id: ', para);
-                        var tmp_assign = '<li><a onclick="response_to_grader(\''+ assignment + '\')">' +
-                            'Assignment ' + (parseInt(assign_index) + 1) +
-                            '</a> </li>';
-                        sub_assign = sub_assign + tmp_assign;
-                    }
-                    // third level nav -- assignment list under course nav
-                    var assi_html = '<ul class="sidenav-third-level collapse" id="course' + index + '">' + sub_assign + '</ul>';
-                    // second level nav -- course list under Assignment
-                    var cour_html = '<li><a class="nav-link-collapse collapsed" data-toggle="collapse" ' +
-                        'href="#course' + index + '">' +
-                        tmp_course.course_id + '</a>' + assi_html + '</li>';
-                    assign_list_html = assign_list_html + cour_html;
+                // for Assignments
+                var sub_assign = "";
+                for (var assign_index in assign_list) {
+                    var assignment = assign_list[assign_index]; // this is assignment_id
+                    // console.log('assignment: ', assignment);
+                    // var para = {
+                    //     'course_name': tmp_course.course_name,
+                    //     'course_id': tmp_course.course_id,
+                    //     'assignment': assignment
+                    // }
+                    // console.log('html - onclick -- assignment_id: ', para);
+                    var tmp_assign = '<li><a onclick="response_to_grader(\'' + assignment + '\')">' +
+                        'Assignment ' + (parseInt(assign_index) + 1) +
+                        '</a></li>';
+                    sub_assign = sub_assign + tmp_assign;
                 }
-                $('#Course').append(assign_list_html);
-                return false;
+                sub_assign += '<li><a onclick="conform_required(\'' + tmp_course['course_id'] + '\')">' +
+                    'Add New</a></li>';
+                // third level nav -- assignment list under course nav
+                var assi_html = '<ul class="sidenav-third-level collapse" id="course' + index + '">' + sub_assign + '</ul>';
+                // second level nav -- course list under Assignment
+                var cour_html = '<li><a class="nav-link-collapse collapsed" data-toggle="collapse" ' +
+                    'href="#course' + index + '">' +
+                    tmp_course.course_id + '</a>' + assi_html + '</li>';
+                assign_list_html = assign_list_html + cour_html;
             }
-        });
+            $('#Course').append(assign_list_html);
+            return false;
+        }
+    });
 
     // submit form
-    $('#myForm').submit(function(){
+    $('#myForm').submit(function () {
         $.ajax({
             url: '/post',
-            data:{
+            data: {
                 'uni': $('#formUni').val(),
                 'grade': $('#formGrade').val(),
                 'comment': $('#formComment').val(),
                 'assignment_id': $('#formAssignment').val()
             },
-            success: function(){
+            success: function () {
                 $('#myModal').modal('hide');
                 $('#success_modal').modal('show');
                 return false;
@@ -110,30 +112,26 @@ $(function(){
 
                 var ToBeGradedList_html = "";
                 var submitted_file_dict = data['submitted_file_dict'];
-
+                // for (var key in submitted_file_dict) {
+                //     ToBeGradedList_html = ToBeGradedList_html + '<tr>' +
+                //         '<td>' + key + '</td>' +
+                //         '<td><button class="btn btn-info" onclick="download(\''+ key +
+                //         '\', \''+ g_assignment_id +'\')">Download</button></td>' +
+                //         '<td><button class="btn btn-primary"' + ' onclick="set_uni(\'' + key +
+                //         '\', \'' + g_assignment_id + '\')" data-toggle="modal" data-target="#myModal">' +
+                //         'Grade</button></td>' +
+                //         '</tr>'
+                // }
                 for (var key in submitted_file_dict) {
                     ToBeGradedList_html = ToBeGradedList_html + '<tr>' +
                         '<td><b>' + key + '</b></td>' +
-                        '<td><a class="btn mt-0 btn-sm btn-info" href="/download_file/'+key + '/'+g_assignment_id+'">Download</a></td>' +
+                        '<td><a class="btn mt-0 btn-sm btn-info" href="/download_file/' + key + '/' + g_assignment_id + '">Download</a></td>' +
                         '<td><button class="btn mt-0 btn-sm btn-primary"' + ' onclick="set_uni(\'' + key +
                         '\', \'' + g_assignment_id + '\')" data-toggle="modal" data-target="#myModal">' +
                         'Grade</button></td>' +
                         '</tr>';
-
-
-
-
-                        // ToBeGradedList_html = ToBeGradedList_html + '<tr>' +
-                        //     '<td><b>' + key + '</b></td>' +
-                        //     '<td><a class="btn mt-0 btn-sm btn-info" href="/download_file/'+key + '/'+g_assignment_id+'">Download</a></td>' +
-                        //     '<td><button class="btn mt-0 btn-sm btn-primary"' + ' onclick="set_uni(\'' + key +
-                        //     '\', \'' + g_assignment_id + '\')" data-toggle="modal" data-target="#myModal">' +
-                        //     'Grade</button></td>' +
-                        //     '</tr>';
-
                 }
 
-                key='test';
                 $('#tb1').append(ToBeGradedList_html);
 
                 // build datatable
@@ -158,7 +156,7 @@ $(function(){
                 $('#tb2').empty();
 
 
-                if(!$.isEmptyObject(data)) {
+                if (!$.isEmptyObject(data)) {
                     var GradedList_html = "";
                     for (var key in data) {
                         GradedList_html = GradedList_html +
@@ -180,6 +178,22 @@ $(function(){
         });
     });
 
+    // conform add assignment
+    $('#conformAdd').click(function () {
+
+        $.ajax({
+            url: '/add_assignment',
+            data: {
+                'course_id': $('#hidden_course_id').text(),
+                'description': $('#description').val()
+            },
+            success: function () {
+
+                location.href = "/show_grader";
+            }
+        });
+    })
+
 
 });
 
@@ -192,7 +206,7 @@ $(function(){
 function response_to_grader(assignment_id) {
 
     // set current global assignment_id
-    g_assignment_id=assignment_id;
+    g_assignment_id = assignment_id;
 
     // mute #title-part
     mute_content_title();
@@ -213,10 +227,10 @@ function response_to_grader(assignment_id) {
 function set_uni(uni, assignment_id) {
 
     $('#formUni').attr({
-        "value" : uni
+        "value": uni
     });
     $('#formAssignment').attr({
-        "value" : assignment_id
+        "value": assignment_id
     });
 
 }
@@ -229,8 +243,13 @@ function download(uni, assignment_id) {
             'uni': uni,
             'assignment_id': assignment_id
         },
-        success: function(result){
+        success: function (result) {
             window.open(result);
         }
     });
+}
+
+function conform_required(course_id) {
+    $('#conform_modal').modal('show');
+    $('#hidden_course_id').text(course_id);
 }

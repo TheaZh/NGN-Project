@@ -439,4 +439,4 @@ def download_from_cloud(object_id):
 if __name__ == '__main__':
     app.secret_key = "this_is_an_NGN_project"
     app.debug = True
-    app.run(host='0.0.0.0', port=8080)
+    app.run()
