@@ -291,7 +291,7 @@ def upload_files():
             print("UPLOADED! -- filename: ", filename)
             response_data['msg'] = 'Successful Uploaded!'
             # remove local tmp file
-            os.remove(tmp_file_path)
+            # os.remove(tmp_file_path)
             files_to_GridFS(tmp_file_path, filename)
 
     return jsonify(response_data)
