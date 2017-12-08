@@ -175,13 +175,13 @@ def download(uni, assignment_id):
         file_io.write(file_db.read())
         file_io.close()
     print("Success")
-    file_download = dir_name + '.gz'
+    file_download = dir_name + '.tar.gz'
     make_targz(download_path, download_path)
     return send_from_directory("./tmp/download", file_download, as_attachment=True)
 
 
 def make_targz(file, source_dir):
-        gz_name = file + ".gz"
+        gz_name = file + ".tar.gz"
         with tarfile.open(gz_name, "w:gz") as tar:
             tar.add(source_dir, arcname=os.path.basename(source_dir))
 
