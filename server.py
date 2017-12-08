@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, session, send_from_directory
-import json, os, datetime, time, sys, tarfile
+import json, os, datetime, time, sys, tarfile, shutil
 from pymongo import MongoClient
 from werkzeug.utils import secure_filename
 from gridfs import *
@@ -153,6 +153,7 @@ def add_assignment():
 
 @app.route('/download_file/<uni>/<assignment_id>')
 def download(uni, assignment_id):
+    clean_tmp()
     # uni = request.args.get('uni')
     # assignment_id = request.args.get('assignment_id')
     assignment = ASSIGNMENT.find_one({'assignment_id': assignment_id})
@@ -163,9 +164,9 @@ def download(uni, assignment_id):
     os.chdir(sys.path[0])
     dir_name = assignment_id + '_' + uni
     download_path = os.path.join("./tmp/download", dir_name)
+    print 'download_path: --- ', download_path
     if not os.path.exists(download_path):
         os.mkdir(download_path)
-    print 'download_path: --- ', download_path
     for file_id in file_ids_list:
         print "file_id --- ", file_id
         file_db = user_file_collection.get(ObjectId(file_id))
@@ -289,7 +290,7 @@ def upload_files():
             print("UPLOADED! -- filename: ", filename)
             response_data['msg'] = 'Successful Uploaded!'
             # remove local tmp file
-            # os.remove(tmp_file_path)
+            os.remove(tmp_file_path)
             files_to_GridFS(tmp_file_path, filename)
 
     return jsonify(response_data)
@@ -420,10 +421,11 @@ def delete_files():
 
 @app.route('/download_from_cloud/<object_id>')
 def download_from_cloud(object_id):
+    clean_tmp()
     cur_user_uni = session['uni']
     user_FS_collection_name = cur_user_uni
     user_FS_collection = GridFS(FILE_DB, user_FS_collection_name)
-
+    os.chdir(sys.path[0])
     if not os.path.exists("./tmp/download"):
         os.mkdir("./tmp/download")
     file_db = user_FS_collection.get(ObjectId(object_id))
@@ -434,6 +436,12 @@ def download_from_cloud(object_id):
     print("Success")
     return send_from_directory("./tmp/download", file_db.filename, as_attachment=True)
 
+
+def clean_tmp():
+    os.chdir(sys.path[0])
+    if os.path.exists("./tmp/download"):
+        shutil.rmtree('./tmp/download')
+    os.mkdir('./tmp/download')
 
 
 if __name__ == '__main__':
