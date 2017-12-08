@@ -382,6 +382,23 @@ def delete_files():
     return jsonify({'msg': msg})
 
 
+@app.route('/download_from_cloud/<object_id>')
+def download_from_cloud(object_id):
+    cur_user_uni = session['uni']
+    user_FS_collection_name = cur_user_uni
+    user_FS_collection = GridFS(FILE_DB, user_FS_collection_name)
+
+    if not os.path.exists("./tmp/download"):
+        os.mkdir("./tmp/download")
+    file_db = user_FS_collection.get(ObjectId(object_id))
+    file_path = os.path.join("./tmp/download", file_db.filename)
+    file_io = open(file_path, "wb")
+    file_io.write(file_db.read())
+    file_io.close()
+    print("Success")
+    return send_from_directory("./tmp/download", file_db.filename, as_attachment=True)
+
+
 
 if __name__ == '__main__':
     app.secret_key = "this_is_an_NGN_project"
