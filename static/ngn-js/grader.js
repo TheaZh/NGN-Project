@@ -88,6 +88,7 @@ $(function () {
                 'assignment_id': $('#formAssignment').val()
             },
             success: function () {
+                $('#myForm')[0].reset();
                 $('#myModal').modal('hide');
                 $('#success_modal').modal('show');
                 return false;
