@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, session, send_from_directory
-import json, os, datetime, time, sys
+import json, os, datetime, time, sys, tarfile
 from pymongo import MongoClient
 from werkzeug.utils import secure_filename
 from gridfs import *
@@ -135,18 +135,33 @@ def download(uni, assignment_id):
     # uni = request.args.get('uni')
     # assignment_id = request.args.get('assignment_id')
     assignment = ASSIGNMENT.find_one({'assignment_id': assignment_id})
-    file_id = assignment['submitted_file_dict'][uni]
+    file_ids_list = assignment['submitted_file_dict'][uni][0]
+    # submitted_file_dict{uni : [ [file ids], timestamp ] }
+    print 'file_ids_list:', file_ids_list
     user_file_collection = GridFS(FILE_DB, uni)
     os.chdir(sys.path[0])
-    if not os.path.exists("./tmp/download"):
-        os.mkdir("./tmp/download")
-    file_db = user_file_collection.get(ObjectId(file_id[0][0]))
-    file_path = os.path.join("./tmp/download", file_db.filename)
-    file_io = open(file_path, "wb")
-    file_io.write(file_db.read())
-    file_io.close()
+    dir_name = assignment_id + '_' + uni
+    download_path = os.path.join("./tmp/download", dir_name)
+    if not os.path.exists(download_path):
+        os.mkdir(download_path)
+    print 'download_path: --- ', download_path
+    for file_id in file_ids_list:
+        print "file_id --- ", file_id
+        file_db = user_file_collection.get(ObjectId(file_id))
+        file_path = os.path.join(download_path, file_db.filename)
+        file_io = open(file_path, "wb")
+        file_io.write(file_db.read())
+        file_io.close()
     print("Success")
-    return send_from_directory("./tmp/download", file_db.filename, as_attachment=True)
+    file_download = dir_name + '.gz'
+    make_targz(download_path, download_path)
+    return send_from_directory("./tmp/download", file_download, as_attachment=True)
+
+
+def make_targz(file, source_dir):
+        gz_name = file + ".gz"
+        with tarfile.open(gz_name, "w:gz") as tar:
+            tar.add(source_dir, arcname=os.path.basename(source_dir))
 
 
 @app.route('/get_grade')
