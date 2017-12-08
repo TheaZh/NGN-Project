@@ -3,13 +3,14 @@ from pymongo import MongoClient
 '''
 #### Default Schema ####
 
-new_user = {'uni': uni,
-            'name': name,
-            'email': email,
-            'password': password,
-            'isGrader': True/False,
-            'course_list': []
-            }
+new_user = {
+    'uni': uni,
+    'name': name,
+    'email': email,
+    'password': password,
+    'isGrader': True/False,
+    'course_list': []
+    }
 
 '''
 class User:

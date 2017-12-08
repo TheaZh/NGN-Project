@@ -200,8 +200,8 @@ function show_uploaded_files(file_ids_list) {
                 // var file_html = '<label class="ml-2 form-check-label"><input class="form-check-input" type="checkbox" value='+ file_name_dict.file + '>'+ file +'</label><br>'
 
                 var file_html = '<tr>' +
-                                '<td>' + file + '</td>' +
-                                ' <td class="text-muted"><i>'+ file_name_dict[file][1] + '</i></td>' +
+                                '<td><a href="/download_from_cloud/' + file_name_dict[file][0] +'">' + file + '</a></td>' +
+                                '<td class="text-muted"><i>'+ file_name_dict[file][1] + '</i></td>' +
                                 '<td><label class="form-check-label">'+
                                 '<input name="choose-submit" type="checkbox" value='+ file_name_dict[file][0] +
                                 '></label>'+
@@ -215,6 +215,7 @@ function show_uploaded_files(file_ids_list) {
         }
     });
 }
+
 
 // show submitted files
 function show_submitted_files(submitted_file_ids, submission_timestamp){
