@@ -130,6 +130,27 @@ def post_grade():
     return jsonify(' ')
 
 
+@app.route('/add_assignment')
+def add_assignment():
+    course_id=request.args.get('course_id')
+    description=request.args.get('description')
+    data = COURSE.find_one({'course_id': course_id})
+    length = len(data['assignment_list'])
+    assignment_id = course_id + '_A' + str(length + 1)
+    data['assignment_list'].append(assignment_id)
+    # update assignment_collection
+    new_assignment = {'assignment_id': assignment_id,
+                      'description': description,
+                      'submitted_file_dict': {},
+                      'upload_file_dict': {},
+                      'grade_dict': {}
+                      }
+    ASSIGNMENT.insert(new_assignment)
+    # update course course_collection
+    COURSE.update_one({'course_id': course_id}, {'$set': data})
+    return jsonify('')
+
+
 @app.route('/download_file/<uni>/<assignment_id>')
 def download(uni, assignment_id):
     # uni = request.args.get('uni')
