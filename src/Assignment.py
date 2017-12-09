@@ -47,82 +47,95 @@ if __name__ == '__main__':
         'description': 'Textbook Chapter 1\n Excercise: 1.1, 1.3, 1.12',
         'submitted_file_dict': {},
         'upload_file_dict':{},
-        'grade_dict': {}
+        'grade_dict': {},
+        'due_date': '2017-12-09'
         },
         {'assignment_id': 'COMS6111_A2',
         'description': 'Textbook Chapter 1\n Excercise: 1.5, 1.8, 1.20',
         'submitted_file_dict': {},
         'upload_file_dict':{},
-        'grade_dict': {}
+        'grade_dict': {},
+        'due_date': '2017-12-16'
         },
         {'assignment_id': 'COMS6111_A3',
         'description': 'Textbook Chapter 2\n Excercise: 2.4, 2.8, 2.17',
         'submitted_file_dict': {},
         'upload_file_dict':{},
-        'grade_dict': {}
+        'grade_dict': {},
+        'due_date': '2017-12-23'
         },
         {'assignment_id': 'ELEN6770_A1',
         'description': 'Textbook Chapter 1\n Excercise: 1.13, 1.18, 1.24',
         'submitted_file_dict': {},
         'upload_file_dict':{},
-        'grade_dict': {}
+        'grade_dict': {},
+        'due_date': '2017-11-09'
         },
         {'assignment_id': 'ELEN6770_A2',
         'description': 'Textbook Chapter 3\n Excercise: 3.5, 3.3, 3.15',
         'submitted_file_dict': {},
         'upload_file_dict':{},
-        'grade_dict': {}
+        'grade_dict': {},
+        'due_date': '2018-01-20'
         },
         {'assignment_id': 'ELEN6770_A3',
         'description': 'Textbook Chapter 4\n Excercise: 4.9, 4.6, 4.7, 4.12, 4.13',
         'submitted_file_dict': {},
         'upload_file_dict':{},
-        'grade_dict': {}
+        'grade_dict': {},
+        'due_date': '2018-2-03'
         },
         {'assignment_id': 'COMS4111_A1',
         'description': 'Textbook Chapter 1\n Excercise: 1.7, 1.17, 1.27',
         'submitted_file_dict': {},
         'upload_file_dict':{},
-        'grade_dict': {}
+        'grade_dict': {},
+        'due_date': '2017-12-06'
         },
         {'assignment_id': 'COMS4111_A2',
         'description': 'Textbook\n Chapter 2\t Excercise: 2.1, 2.3\n Chapter3\t Excercise: 3.30',
         'submitted_file_dict': {},
         'upload_file_dict':{},
-        'grade_dict': {}
+        'grade_dict': {},
+        'due_date': '2017-12-13'
         },
         {'assignment_id': 'COMS4111_A3',
         'description': 'Textbook Chapter 4\n Excercise: 4.9, 4.6, 4.7, 4.12, 4.13',
         'submitted_file_dict': {},
         'upload_file_dict':{},
-        'grade_dict': {}
+        'grade_dict': {},
+        'due_date': '2017-12-25'
         },
         {'assignment_id': 'COMS1234_A1',
         'description': 'Textbook Chapter 1\n Excercise: 1.9, 1.10, 1.21',
         'submitted_file_dict': {},
         'upload_file_dict':{},
-        'grade_dict': {}
+        'grade_dict': {},
+        'due_date': '2017-12-21'
         },
         {'assignment_id': 'ELEN5567_A1',
         'description': 'Textbook Chapter 1\n Excercise: 1.5, 1.12, 1.24',
         'submitted_file_dict': {},
         'upload_file_dict':{},
-        'grade_dict': {}
+        'grade_dict': {},
+        'due_date': '2017-12-01'
         },
         {'assignment_id': 'ELEN4377_A1',
         'description': 'Textbook Chapter 1\n Excercise: 1.18, 1.27',
         'submitted_file_dict': {},
         'upload_file_dict':{},
-        'grade_dict': {}
+        'grade_dict': {},
+        'due_date': '2017-12-12'
         },
         {'assignment_id': 'COMS4396_A1',
         'description': 'Textbook Chapter 1\n Excercise: 1.3, 1.18, 1.23',
         'submitted_file_dict': {},
         'upload_file_dict':{},
-        'grade_dict': {}
+        'grade_dict': {},
+        'due_date': '2017-12-30'
         }
     ]
     assig = Assignment()
-    # assig.insert_assignments(assignment_data)
-    # assig.close_DB()
+    assig.insert_assignments(assignment_data)
+    assig.close_DB()
     # assig.add_assignment('COMS4396','Textbook Chapter 2\n Excercise: 2.8, 1.17, 1.34')

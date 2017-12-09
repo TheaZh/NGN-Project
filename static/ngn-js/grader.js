@@ -14,6 +14,10 @@ $(function () {
         '</b></i></p>';
     $('#title-part').append(description).css('display', 'block');
 
+    $('[type="date"].min-today').prop('min', function(){
+        return new Date().toJSON().split('T')[0];
+        console.log(new Date().toJSON().split('T')[0]);
+    });
 
     // data fetching & builder nav bar
     $.ajax({
@@ -182,7 +186,7 @@ $(function () {
     // confirm add assignment
     $('#confirmAdd').click(function () {
 
-        if($('#description').val()===''){
+        if($('#description').val()==='' || $('#due-date').value === ''){
             $('#description-span').css("display", "block");
             return ;
         }
@@ -191,7 +195,8 @@ $(function () {
             url: '/add_assignment',
             data: {
                 'course_id': $('#hidden_course_id').text(),
-                'description': $('#description').val()
+                'description': $('#description').val(),
+                'due_date': $('#due-date').value
             },
             success: function () {
 

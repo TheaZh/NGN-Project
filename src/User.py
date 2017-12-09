@@ -41,7 +41,7 @@ class User:
 
 
 if __name__ == '__main__':
-    '''student_data = [
+    student_data = [
                 {'uni': 'ab0001',
                 'name': 'Avil',
                 'email': 'ab0001@gmail.com',
@@ -162,4 +162,4 @@ if __name__ == '__main__':
     user = User()
     user.insert_many_users(student_data)
     user.insert_many_users(grader_data)
-    user.close_DB()'''
+    user.close_DB()

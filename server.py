@@ -135,6 +135,7 @@ def post_grade():
 def add_assignment():
     course_id=request.args.get('course_id')
     description=request.args.get('description')
+    due_date = request.args.get('due_date')
     data = COURSE.find_one({'course_id': course_id})
     length = len(data['assignment_list'])
     assignment_id = course_id + '_A' + str(length + 1)
@@ -142,6 +143,7 @@ def add_assignment():
     # update assignment_collection
     new_assignment = {'assignment_id': assignment_id,
                       'description': description,
+                      'due_date': due_date,
                       'submitted_file_dict': {},
                       'upload_file_dict': {},
                       'grade_dict': {}

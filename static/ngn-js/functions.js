@@ -154,7 +154,8 @@ function response_to_assignment(uni, course_name, course_id, assignment_id) {
             // assignment description
             var assignment_description = data.description;
             var assign_description_html = '<p><i>Description:</i></p><p>' + assignment_description + '</p>';
-            $("#assignment_description").append(assign_description_html);
+            var assign_due_date = '<p class="text-muted"><i>Due: ' + data.due_date + '</i><p>';
+            $("#assignment_description").append(assign_due_date + assign_description_html);
 
             //********* Uploaded files list part ***********
             // manage card whose id is "#uploaded-file"
