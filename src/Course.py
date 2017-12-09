@@ -60,37 +60,94 @@ if __name__ == '__main__':
         {'course_id' : 'COMS6111',
         'course_name': 'Advanced Database Systems',
         'assignment_list': ['COMS6111_A1', 'COMS6111_A2','COMS6111_A3'],
-        'grader_id': 'ac1007'
+        'grader_id': 'ac1007',
+        "students": [
+            "ab0002",
+            "ab0005",
+            "uz0202",
+            "zh1266",
+            "fg8745",
+            "mp1555"
+        ]
         },
-            {'course_id' : 'ELEN6770',
+        {'course_id' : 'ELEN6770',
         'course_name': 'Next Generation Networking',
         'assignment_list': ['ELEN6770_A1', 'ELEN6770_A2', 'ELEN6770_A3'],
-        'grader_id': 'ac1007'
+        'grader_id': 'ac1007',
+        "students": [
+            "ab0001",
+            "ab0002",
+            "ab0005",
+            "uz0202",
+            "zh1266",
+            "pd2222",
+            "fg8745",
+            "mp1555"
+        ]
         },
         {'course_id' : 'COMS4111',
         'course_name': 'Introduction to Database Systems',
         'assignment_list': ['COMS4111_A1', 'COMS4111_A2', 'COMS4111_A3'],
-        'grader_id': 'lu5200'
+        'grader_id': 'lu5200',
+        "students": [
+            "ab0001",
+            "ap1050",
+            "fc2345"
+        ]
         },
         {'course_id' : 'COMS1234',
         'course_name': 'Software Development',
         'assignment_list': ['COMS1234_A1'],
-        'grader_id': 'xz1332'
+        'grader_id': 'xz1332',
+        "students": [
+            "ab0002",
+            "ab0005",
+            "uz0202",
+            "zh1266",
+            "pd2222",
+            "fg8745",
+            "mp1555"
+        ]
         },
         {'course_id' : 'ELEN5567',
         'course_name': 'Content Distribution Networks',
         'assignment_list': ['ELEN5567_A1'],
-        'grader_id': 'lu5200'
+        'grader_id': 'lu5200',
+        "students": [
+            "ab0001",
+            "ab0002",
+            "ce1022",
+            "fc2345",
+            "ac1256",
+            "fg8745",
+            "jk0033"
+        ]
         },
         {'course_id' : 'ELEN4377',
         'course_name': 'Introduction to Computer Networks',
         'assignment_list': ['ELEN4377_A1'],
-        'grader_id':'ac1007'
+        'grader_id':'ac1007',
+        "students": [
+            "ab0001",
+            "ce1022",
+            "ap1050",
+            "fc2345",
+            "ac1256",
+            "fg8745"
+        ]
         },
         {'course_id' : 'COMS4396',
         'course_name': 'Introduction to System Design',
         'assignment_list': ['COMS4396_A1'],
-        'grader_id': 'xz1332'
+        'grader_id': 'xz1332',
+        "students": [
+            "ap1050",
+            "uz0202",
+            "pd2222",
+            "ac1256",
+            "jk0033",
+            "mp1555"
+        ]
         }
     ]
     course = Course()
