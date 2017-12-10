@@ -5,7 +5,6 @@ from werkzeug.utils import secure_filename
 from gridfs import *
 from bson.objectid import ObjectId
 
-
 # normal MongoDB
 MONGO_URI = "mongodb://assignment:assignment123@ds161873.mlab.com:61873/assignment-management-system"
 client = MongoClient(MONGO_URI)
@@ -21,7 +20,6 @@ FILE_DB = GF['files-management']
 
 CACHE = './tmp/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-
 
 app = Flask(__name__)
 
@@ -133,8 +131,8 @@ def post_grade():
 
 @app.route('/add_assignment')
 def add_assignment():
-    course_id=request.args.get('course_id')
-    description=request.args.get('description')
+    course_id = request.args.get('course_id')
+    description = request.args.get('description')
     due_date = request.args.get('due_date')
     data = COURSE.find_one({'course_id': course_id})
     length = len(data['assignment_list'])
@@ -184,9 +182,9 @@ def download(uni, assignment_id):
 
 
 def make_targz(file, source_dir):
-        gz_name = file + ".tar.gz"
-        with tarfile.open(gz_name, "w:gz") as tar:
-            tar.add(source_dir, arcname=os.path.basename(source_dir))
+    gz_name = file + ".tar.gz"
+    with tarfile.open(gz_name, "w:gz") as tar:
+        tar.add(source_dir, arcname=os.path.basename(source_dir))
 
 
 @app.route('/get_grade')
@@ -226,16 +224,18 @@ def get_grade():
 @app.route('/get_assignment')
 def get_assignment():
     para = request.args
-    print('get_assignment parameters: ', para)
-    # course_id = para.get('course_id')
     assignment_id = para.get('assignment_id')
+    # assignment_id: COMS6111_A1
+    course_id = assignment_id.split('_')[0]
+    course_std = COURSE.find_one({'course_id': course_id})['students']
     session['assignment_id'] = assignment_id
     # print(session['assignment_id'])
     assignment_info = ASSIGNMENT.find_one({'assignment_id': assignment_id})
     assignment_info.pop('_id')
+    assignment_info['students'] = course_std
+    print('students: ', assignment_info['students'])
     # print(assignment_info)
     return jsonify(assignment_info)
-
 
 
 @app.route('/get_uploaded_files')
@@ -243,7 +243,7 @@ def get_uploaded_files():
     # Get file id list
     file_ids_list = json.loads(request.args.get('file_ids_list'))
     print file_ids_list
-    # access to GridFS collection -- collection name is studetn uni
+    # access to GridFS collection -- collection name is student uni
     cur_user_uni = session['uni']
     cur_assignment_id = session['assignment_id']
     user_FS_collection_name = cur_user_uni
@@ -308,7 +308,7 @@ def files_to_GridFS(file_path, file_name):
 
     # count the number of versions that have been already submitted to GridFS
     version_count = 0
-    for grid_out in user_FS_collection.find({'filename':file_name}):
+    for grid_out in user_FS_collection.find({'filename': file_name}):
         version_count = version_count + 1
     version_count = version_count + 1
     # put file in GridFS collection
@@ -321,7 +321,8 @@ def files_to_GridFS(file_path, file_name):
         # assignment_id = cur_assignment_id
         ts = time.time()
         display_time = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-        id = user_FS_collection.put(data, filename=file_name, version = version_count, assignment_id = cur_assignment_id, timestamp = display_time)
+        id = user_FS_collection.put(data, filename=file_name, version=version_count, assignment_id=cur_assignment_id,
+                                    timestamp=display_time)
     # get the _id of this file
     file_id = str(id)
     # update Assignment collection
@@ -350,7 +351,7 @@ def submit_files():
     display_time = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     # no file chosen to submit
     if len(submit_id_list) == 0:
-        return jsonify({'msg':'NoFile'})
+        return jsonify({'msg': 'NoFile'})
 
     assignment_info = ASSIGNMENT.find_one({'assignment_id': cur_assignment_id})
     submitted_file_dict = assignment_info['submitted_file_dict']
@@ -363,7 +364,7 @@ def submit_files():
                           {'$set': {
                               "submitted_file_dict": submitted_file_dict
                           }})
-    print('update submit: ',ASSIGNMENT.find_one({'assignment_id': cur_assignment_id}))
+    print('update submit: ', ASSIGNMENT.find_one({'assignment_id': cur_assignment_id}))
     return jsonify({'msg': 'FileSubmitted'})
 
 
@@ -450,4 +451,4 @@ def clean_tmp():
 if __name__ == '__main__':
     app.secret_key = "this_is_an_NGN_project"
     app.debug = True
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host='0.0.0.0', port=8080)

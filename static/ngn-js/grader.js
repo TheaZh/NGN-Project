@@ -117,25 +117,48 @@ $(function () {
 
                 var ToBeGradedList_html = "";
                 var submitted_file_dict = data['submitted_file_dict'];
+                var students=data['students'];
                 // for (var key in submitted_file_dict) {
-                //     ToBeGradedList_html = ToBeGradedList_html + '<tr>' +
-                //         '<td>' + key + '</td>' +
-                //         '<td><button class="btn btn-info" onclick="download(\''+ key +
-                //         '\', \''+ g_assignment_id +'\')">Download</button></td>' +
-                //         '<td><button class="btn btn-primary"' + ' onclick="set_uni(\'' + key +
-                //         '\', \'' + g_assignment_id + '\')" data-toggle="modal" data-target="#myModal">' +
-                //         'Grade</button></td>' +
-                //         '</tr>'
+                //     if($.inArray(key, students)!=-1){
+                //         ToBeGradedList_html = ToBeGradedList_html + '<tr>' +
+                //             '<td><b>' + key + '</b></td>' +
+                //             '<td><a class="btn mt-0 btn-sm btn-info" href="/download_file/' + key + '/' + g_assignment_id + '">Download</a></td>' +
+                //             '<td><button class="btn mt-0 btn-sm btn-primary"' + ' onclick="set_uni(\'' + key +
+                //             '\', \'' + g_assignment_id + '\')" data-toggle="modal" data-target="#myModal">' +
+                //             'Grade</button></td>' +
+                //             '</tr>';
+                //     }
+                //     else{
+                //         ToBeGradedList_html = ToBeGradedList_html + '<tr>' +
+                //             '<td><b>' + key + '</b></td>' +
+                //             '<td><button class="btn mt-0 btn-sm btn-info" disabled="true">Download</button></td>' +
+                //             '<td><button class="btn mt-0 btn-sm btn-primary"' + ' onclick="set_uni(\'' + key +
+                //             '\', \'' + g_assignment_id + '\')" data-toggle="modal" data-target="#myModal">' +
+                //             'Grade</button></td>' +
+                //             '</tr>';
+                //     }
                 // }
-                for (var key in submitted_file_dict) {
-                    ToBeGradedList_html = ToBeGradedList_html + '<tr>' +
-                        '<td><b>' + key + '</b></td>' +
-                        '<td><a class="btn mt-0 btn-sm btn-info" href="/download_file/' + key + '/' + g_assignment_id + '">Download</a></td>' +
-                        '<td><button class="btn mt-0 btn-sm btn-primary"' + ' onclick="set_uni(\'' + key +
-                        '\', \'' + g_assignment_id + '\')" data-toggle="modal" data-target="#myModal">' +
-                        'Grade</button></td>' +
-                        '</tr>';
-                }
+
+                $.each(students, function(i, key){
+                    if(submitted_file_dict[key]==undefined){
+                        ToBeGradedList_html = ToBeGradedList_html + '<tr>' +
+                            '<td><b>' + key + '</b></td>' +
+                            '<td><button class="btn mt-0 btn-sm btn-info" disabled>Download</button></td>' +
+                            '<td><button class="btn mt-0 btn-sm btn-primary"' + ' onclick="set_uni(\'' + key +
+                            '\', \'' + g_assignment_id + '\')" data-toggle="modal" data-target="#myModal">' +
+                            'Grade</button></td>' +
+                            '</tr>';
+                    }
+                    else{
+                        ToBeGradedList_html = ToBeGradedList_html + '<tr>' +
+                            '<td><b>' + key + '</b></td>' +
+                            '<td><a class="btn mt-0 btn-sm btn-info" href="/download_file/' + key + '/' + g_assignment_id + '">Download</a></td>' +
+                            '<td><button class="btn mt-0 btn-sm btn-primary"' + ' onclick="set_uni(\'' + key +
+                            '\', \'' + g_assignment_id + '\')" data-toggle="modal" data-target="#myModal">' +
+                            'Grade</button></td>' +
+                            '</tr>';
+                    }
+                });
 
                 $('#tb1').append(ToBeGradedList_html);
 
