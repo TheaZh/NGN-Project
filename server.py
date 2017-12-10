@@ -364,6 +364,7 @@ def submit_files():
                               "submitted_file_dict": submitted_file_dict
                           }})
     print('update submit: ', ASSIGNMENT.find_one({'assignment_id': cur_assignment_id}))
+    time.sleep(0.5)
     return jsonify({'msg': 'FileSubmitted'})
 
 
@@ -419,6 +420,7 @@ def delete_files():
                           {'$set': {
                               "upload_file_dict": upload_file_dict
                           }})
+    time.sleep(0.5)
     return jsonify({'msg': msg})
 
 
