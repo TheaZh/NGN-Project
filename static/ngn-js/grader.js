@@ -4,7 +4,7 @@
 
 // set global assignment_id
 var g_assignment_id = '';
-
+var cur_student_list = [];
 
 $(function () {
     var uni = $("#userUNI").text();
@@ -54,13 +54,6 @@ $(function () {
                 var sub_assign = "";
                 for (var assign_index in assign_list) {
                     var assignment = assign_list[assign_index]; // this is assignment_id
-                    // console.log('assignment: ', assignment);
-                    // var para = {
-                    //     'course_name': tmp_course.course_name,
-                    //     'course_id': tmp_course.course_id,
-                    //     'assignment': assignment
-                    // }
-                    // console.log('html - onclick -- assignment_id: ', para);
                     var tmp_assign = '<li><a onclick="response_to_grader(\'' + assignment + '\')">' +
                         'Assignment ' + (parseInt(assign_index) + 1) +
                         '</a></li>';
@@ -118,32 +111,14 @@ $(function () {
                 var ToBeGradedList_html = "";
                 var submitted_file_dict = data['submitted_file_dict'];
                 var students=data['students'];
-                // for (var key in submitted_file_dict) {
-                //     if($.inArray(key, students)!=-1){
-                //         ToBeGradedList_html = ToBeGradedList_html + '<tr>' +
-                //             '<td><b>' + key + '</b></td>' +
-                //             '<td><a class="btn mt-0 btn-sm btn-info" href="/download_file/' + key + '/' + g_assignment_id + '">Download</a></td>' +
-                //             '<td><button class="btn mt-0 btn-sm btn-primary"' + ' onclick="set_uni(\'' + key +
-                //             '\', \'' + g_assignment_id + '\')" data-toggle="modal" data-target="#myModal">' +
-                //             'Grade</button></td>' +
-                //             '</tr>';
-                //     }
-                //     else{
-                //         ToBeGradedList_html = ToBeGradedList_html + '<tr>' +
-                //             '<td><b>' + key + '</b></td>' +
-                //             '<td><button class="btn mt-0 btn-sm btn-info" disabled="true">Download</button></td>' +
-                //             '<td><button class="btn mt-0 btn-sm btn-primary"' + ' onclick="set_uni(\'' + key +
-                //             '\', \'' + g_assignment_id + '\')" data-toggle="modal" data-target="#myModal">' +
-                //             'Grade</button></td>' +
-                //             '</tr>';
-                //     }
-                // }
+                cur_student_list = students;
+                console.log("cur_student_list:", cur_student_list);
 
                 $.each(students, function(i, key){
                     if(submitted_file_dict[key]==undefined){
                         ToBeGradedList_html = ToBeGradedList_html + '<tr>' +
                             '<td><b>' + key + '</b></td>' +
-                            '<td><button class="btn mt-0 btn-sm btn-info" disabled>Download</button></td>' +
+                            '<td><button class="btn mt-0 btn-sm btn-secondary" disabled>Download</button></td>' +
                             '<td><button class="btn mt-0 btn-sm btn-primary"' + ' onclick="set_uni(\'' + key +
                             '\', \'' + g_assignment_id + '\')" data-toggle="modal" data-target="#myModal">' +
                             'Grade</button></td>' +
@@ -183,22 +158,24 @@ $(function () {
                 // refresh current table
                 $('#tb2').empty();
 
-
-                if (!$.isEmptyObject(data)) {
-                    var GradedList_html = "";
-                    for (var key in data) {
-                        GradedList_html = GradedList_html +
-                            '<tr>' +
-                            '<td>' + key + '</td>' +
-                            '<td>' + data[key][0] + '</td>' +
-                            '<td>' + data[key][1] + '</td>' +
-                            '</tr>'
+                var students = cur_student_list;
+                var grade_dict = data;
+                var GradedList_html = "";
+                $.each(students, function(i, key){
+                    var GradeNum = '<td class="text-muted"><i>Not Graded</i></td>';
+                    var CommentStr = '<td class="text-muted"><i>No Comment</i></td>';
+                    if(grade_dict[key]!=undefined){
+                        GradeNum = '<td>'+grade_dict[key][0]+'</td>';
+                        CommentStr = '<td>'+grade_dict[key][1]+'</td>';
                     }
+                    GradedList_html = GradedList_html + '<tr>' +
+                        '<td><b>' + key + '</b></td>' +
+                        GradeNum +
+                        CommentStr +
+                        '</tr>';
+                });
+                $('#tb2').append(GradedList_html);
 
-                    $('#tb2').append(GradedList_html);
-                    // build datatable
-
-                }
                 $('#GradedList').dataTable({
                     ordering: false
                 });

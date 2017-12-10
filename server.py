@@ -95,7 +95,6 @@ def grader_view():
     grade_dict = assignment['grade_dict']
     return jsonify(grade_dict)
 
-
 @app.route('/show_student/<userUNI>', methods=['POST', 'GET'])
 def show(userUNI):
     user_uni = json.loads(userUNI)['uni']
