@@ -58,7 +58,7 @@ def student(userUNI):
 
     user_data = USER.find_one({'uni': user_uni})
     user_data.pop('_id')
-    # print 'user_data ---', user_data
+    # # print 'user_data ---', user_data
 
     courses_list = user_data['course_list']
     courses_data = []
@@ -67,7 +67,7 @@ def student(userUNI):
         tmp_course_data = COURSE.find_one({'course_id': one})
         tmp_course_data.pop('_id')
         courses_data.append(tmp_course_data)
-    # print 'all course -- ', courses_data
+    # # print 'all course -- ', courses_data
     user_course = [user_data, courses_data]
     return jsonify(user_course)
 
@@ -98,7 +98,7 @@ def grader_view():
 @app.route('/show_student/<userUNI>', methods=['POST', 'GET'])
 def show(userUNI):
     user_uni = json.loads(userUNI)['uni']
-    # print user_uni
+    # # print user_uni
     return render_template('student-page.html', user_uni=user_uni)
 
 
@@ -159,22 +159,22 @@ def download(uni, assignment_id):
     assignment = ASSIGNMENT.find_one({'assignment_id': assignment_id})
     file_ids_list = assignment['submitted_file_dict'][uni][0]
     # submitted_file_dict{uni : [ [file ids], timestamp ] }
-    print 'file_ids_list:', file_ids_list
+    # print 'file_ids_list:', file_ids_list
     user_file_collection = GridFS(FILE_DB, uni)
     os.chdir(sys.path[0])
     dir_name = assignment_id + '_' + uni
     download_path = os.path.join("./tmp/download", dir_name)
-    print 'download_path: --- ', download_path
+    # print 'download_path: --- ', download_path
     if not os.path.exists(download_path):
         os.mkdir(download_path)
     for file_id in file_ids_list:
-        print "file_id --- ", file_id
+        # print "file_id --- ", file_id
         file_db = user_file_collection.get(ObjectId(file_id))
         file_path = os.path.join(download_path, file_db.filename)
         file_io = open(file_path, "wb")
         file_io.write(file_db.read())
         file_io.close()
-    print("Success")
+    # print("Success")
     file_download = dir_name + '.tar.gz'
     make_targz(download_path, download_path)
     return send_from_directory("./tmp/download", file_download, as_attachment=True)
@@ -200,23 +200,23 @@ def get_grade():
     grader_name = USER.find_one({'uni': grader_uni})['name']
 
     assignment_list = sorted(course_info['assignment_list'])
-    # print 'assign list: ', assignment_list
+    # # print 'assign list: ', assignment_list
     # data = []
     grade = dict()
     for assign_id in assignment_list:
         assign_data = ASSIGNMENT.find_one({'assignment_id': assign_id})
         grade_dict = assign_data['grade_dict']
-        # print 'grade_dice: ', grade_dict
+        # # print 'grade_dice: ', grade_dict
         grade[assign_id] = []
         if uni in grade_dict:
             grade[assign_id] = grade_dict[uni]
-    # print grade
+    # # print grade
     data = {
         'grade': grade,
         'course_info': course_info,
         'grader': grader_name
     }
-    # print 'data', data
+    # # print 'data', data
     return jsonify(data)
 
 
@@ -228,12 +228,12 @@ def get_assignment():
     course_id = assignment_id.split('_')[0]
     course_std = COURSE.find_one({'course_id': course_id})['students']
     session['assignment_id'] = assignment_id
-    # print(session['assignment_id'])
+    # # print(session['assignment_id'])
     assignment_info = ASSIGNMENT.find_one({'assignment_id': assignment_id})
     assignment_info.pop('_id')
     assignment_info['students'] = course_std
-    print('students: ', assignment_info['students'])
-    # print(assignment_info)
+    # print('students: ', assignment_info['students'])
+    # # print(assignment_info)
     return jsonify(assignment_info)
 
 
@@ -241,7 +241,7 @@ def get_assignment():
 def get_uploaded_files():
     # Get file id list
     file_ids_list = json.loads(request.args.get('file_ids_list'))
-    print file_ids_list
+    # print file_ids_list
     # access to GridFS collection -- collection name is student uni
     cur_user_uni = session['uni']
     cur_assignment_id = session['assignment_id']
@@ -272,24 +272,24 @@ def upload_files():
         'msg': ''
     }
     if request.method == 'POST':
-        print('LET US UPLOAD!!!!')
+        # print('LET US UPLOAD!!!!')
         # check if the post request has the file part
         if 'file' not in request.files:
-            print('No file part')
+            # print('No file part')
             response_data['msg'] = 'No file part. Error!'
 
         file = request.files['file']
         # if user does not select file, browser also
         # submit a empty part without filename
         if file.filename == '':
-            print('No selected file')
+            # print('No selected file')
             response_data['msg'] = 'Please Select a File.'
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             tmp_file_path = os.path.join(os.path.abspath(CACHE), filename)
             file.save(tmp_file_path)
             # return redirect(request.url)
-            print("UPLOADED! -- filename: ", filename)
+            # print("UPLOADED! -- filename: ", filename)
             response_data['msg'] = 'Successful Uploaded!'
             # remove local tmp file
             # os.remove(tmp_file_path)
@@ -327,12 +327,12 @@ def files_to_GridFS(file_path, file_name):
     # update Assignment collection
     assignment_info = ASSIGNMENT.find_one({'assignment_id': cur_assignment_id})
     upload_file_dict = assignment_info['upload_file_dict']
-    # print('upload_file_dict:--', upload_file_dict)
+    # # print('upload_file_dict:--', upload_file_dict)
     if cur_user_uni not in upload_file_dict:
         upload_file_dict[cur_user_uni] = []
     upload_file_dict[cur_user_uni].append(file_id)
     assignment_info['upload_file_dict'] = upload_file_dict
-    # print('assignment_info: -- ', assignment_info)
+    # # print('assignment_info: -- ', assignment_info)
     ASSIGNMENT.update_one({'assignment_id': cur_assignment_id},
                           {'$set': {
                               "upload_file_dict": upload_file_dict
@@ -342,7 +342,7 @@ def files_to_GridFS(file_path, file_name):
 @app.route('/submit_files')
 def submit_files():
     submit_id_list = json.loads(request.args.get('submit_id_list'))
-    print('submit_id_list:', submit_id_list)
+    # print('submit_id_list:', submit_id_list)
     cur_user_uni = session['uni']
     cur_assignment_id = session['assignment_id']
     # timestamp for submission
@@ -363,7 +363,7 @@ def submit_files():
                           {'$set': {
                               "submitted_file_dict": submitted_file_dict
                           }})
-    print('update submit: ', ASSIGNMENT.find_one({'assignment_id': cur_assignment_id}))
+    # print('update submit: ', ASSIGNMENT.find_one({'assignment_id': cur_assignment_id}))
     time.sleep(0.5)
     return jsonify({'msg': 'FileSubmitted'})
 
@@ -371,7 +371,7 @@ def submit_files():
 @app.route('/get_submitted_files')
 def get_submitted_files():
     submitted_file_ids = json.loads(request.args.get('submitted_file_ids'))
-    print('submitted_file_ids: ', submitted_file_ids)
+    # print('submitted_file_ids: ', submitted_file_ids)
     cur_user_uni = session['uni']
     cur_assignment_id = session['assignment_id']
     user_FS_collection_name = cur_user_uni
@@ -380,7 +380,7 @@ def get_submitted_files():
     submitted_file_name_dict = {}
     if submitted_file_ids:
         for file_id in submitted_file_ids:
-            print('each file id submit -- ', file_id)
+            # print('each file id submit -- ', file_id)
             tmp_file_data = user_FS_collection.find_one({'_id': ObjectId(file_id)})
             tmp_file_name = tmp_file_data.filename
             tmp_file_version = tmp_file_data.version
@@ -392,7 +392,7 @@ def get_submitted_files():
 @app.route('/delete_files')
 def delete_files():
     delete_id_list = json.loads(request.args.get('delete_id_list'))
-    print('Delete:', delete_id_list)
+    # print('Delete:', delete_id_list)
 
     cur_assignment_id = session['assignment_id']
     cur_user_uni = session['uni']
@@ -405,17 +405,17 @@ def delete_files():
     cur_user_submitted = []
     if cur_user_uni in submitted_file_dict:
         cur_user_submitted = submitted_file_dict[cur_user_uni][0]
-        print 'cur_user_submitted: ', cur_user_submitted
+        # print 'cur_user_submitted: ', cur_user_submitted
     msg = ''
     for delete_id in delete_id_list:
         if delete_id in cur_user_submitted:
             msg = 'Some files cannot be deleted, because they have been already submitted.'
-            print msg
-            print 'Skipped ----- ', delete_id
+            # print msg
+            # print 'Skipped ----- ', delete_id
             continue
         upload_file_dict[cur_user_uni].remove(delete_id)
         user_FS_collection.delete(ObjectId(delete_id))
-        print 'Deleted ---- ', delete_id
+        # print 'Deleted ---- ', delete_id
     ASSIGNMENT.update_one({'assignment_id': cur_assignment_id},
                           {'$set': {
                               "upload_file_dict": upload_file_dict
@@ -438,7 +438,7 @@ def download_from_cloud(object_id):
     file_io = open(file_path, "wb")
     file_io.write(file_db.read())
     file_io.close()
-    print("Success")
+    # print("Success")
     return send_from_directory("./tmp/download", file_db.filename, as_attachment=True)
 
 
