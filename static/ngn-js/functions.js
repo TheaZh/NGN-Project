@@ -157,6 +157,17 @@ function response_to_assignment(uni, course_name, course_id, assignment_id) {
             var assign_due_date = '<p class="text-muted"><i>Due: ' + data.due_date + '</i><p>';
             $("#assignment_description").append(assign_due_date + assign_description_html);
 
+            // Submit button
+            var due_date = data.due_date;
+            var today = new Date().toJSON().split('T')[0];
+
+            if(due_date < today){
+                $('#submit-assignment').prop('disabled', true);
+            }
+            else{
+                $('#submit-assignment').prop('disabled', false);
+            }
+
             //********* Uploaded files list part ***********
             // manage card whose id is "#uploaded-file"
             //console.log('data:',data);
