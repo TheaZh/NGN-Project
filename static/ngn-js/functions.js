@@ -159,7 +159,17 @@ function response_to_assignment(uni, course_name, course_id, assignment_id) {
 
             // Submit button
             var due_date = data.due_date;
-            var today = new Date().toJSON().split('T')[0];
+            var date = new Date();
+            var dd = date.getDate();
+            var mm = date.getMonth()+1; //January is 0!
+            var yyyy = date.getFullYear();
+            if(dd<10){
+                dd='0'+dd;
+            }
+            if(mm<10){
+                mm='0'+mm;
+            }
+            var today = yyyy + '-' + mm + '-' + dd;
 
             if(due_date < today){
                 $('#submit-assignment').prop('disabled', true);
