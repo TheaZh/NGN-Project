@@ -246,6 +246,7 @@ function show_submitted_files(submitted_file_ids, submission_timestamp){
     if(submission_timestamp != ''){
         $.ajax({
             url:'/get_submitted_files',
+            async: false,
             data:{
                 'submitted_file_ids': JSON.stringify(submitted_file_ids)
             },
@@ -281,6 +282,7 @@ function submit_files(){
         //console.log('new submit list: ', submit_list);
         $.ajax({
             url: '/submit_files',
+            async: false,
             data: {
                 'submit_id_list': JSON.stringify(submit_list)
             },
@@ -309,6 +311,7 @@ function delete_files(){
         //console.log('new submit list: ', submit_list);
         $.ajax({
             url: '/delete_files',
+            async: false,
             data: {
                 'delete_id_list': JSON.stringify(delete_list)
             },
