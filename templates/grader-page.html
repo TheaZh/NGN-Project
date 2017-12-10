@@ -157,7 +157,7 @@
                         <fieldset class="form-group">
                             <label for="formGradeGrade">Grade</label>
                             <input type="number" name="grade" class="form-control" min="0" max="100" id="formGrade"
-                                   placeholder="Enter grade">
+                                   placeholder="Enter grade" required>
                         </fieldset>
 
                         <input type="hidden" name="uni" class="form-control" id="formUni">
@@ -225,13 +225,13 @@
                 </div>
                 <div class="modal-body">
                     <span class="mt-1 mb-4">Click Publish button to add a new assignment.</span>
-                    <span id='description-span' class="text-muted mb-2" style="display:none"><i>Missing information.</i></span>
                     <p></p>
-                    <p>Description: <textarea rows="2" class="form-control" id="description"></textarea></p>
+                    <span id='description-span' class="text-muted mb-2" style="display:none"><i>Missing information.</i></span>
+                    <p>Description: <textarea rows="2" class="form-control" id="description" required></textarea></p>
                     <p></p>
                     <p>Due day:</p>
                     <p></p>
-                    <input class="min-today" id="due-date" type="date" placeholder="YYYY-MM-DD" data-date-split-input="true" />
+                    <input class="min-today" id="due-date" type="date" placeholder="YYYY-MM-DD" data-date-split-input="true" required/>
                     <p id="hidden_course_id" style="display: none;"></p>
                 </div>
                 <div class="modal-footer">

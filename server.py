@@ -450,4 +450,4 @@ def clean_tmp():
 if __name__ == '__main__':
     app.secret_key = "this_is_an_NGN_project"
     app.debug = True
-    app.run()
+    app.run(host="0.0.0.0", port=8080)

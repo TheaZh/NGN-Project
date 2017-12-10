@@ -186,7 +186,7 @@ $(function () {
     // confirm add assignment
     $('#confirmAdd').click(function () {
 
-        if($('#description').val()==='' || $('#due-date').value === ''){
+        if($('#description').val()==='' || $('#due-date').value == null){
             $('#description-span').css("display", "block");
             return ;
         }
