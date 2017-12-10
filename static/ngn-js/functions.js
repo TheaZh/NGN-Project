@@ -290,11 +290,13 @@ function submit_files(){
                 //console.log("submitted message:", msg);
             }
         });
-        response_to_assignment(uni, cur_course_name, cur_course_id, cur_assignment_id);
+        // response_to_assignment(uni, cur_course_name, cur_course_id, cur_assignment_id);
     }
     else{
         //console.log('no submit file chosen');
+        return ;
     }
+    response_to_assignment(uni, cur_course_name, cur_course_id, cur_assignment_id);
 }
 
 // delete uploaded files
@@ -330,9 +332,11 @@ function delete_files(){
                 $("#delete_file_span").empty().append(message);
             }
         });
-        response_to_assignment(uni, cur_course_name, cur_course_id, cur_assignment_id);
+        // response_to_assignment(uni, cur_course_name, cur_course_id, cur_assignment_id);
     }
     else{
         $("#delete_file_span").empty().append('No File Choosen!');
+        return ;
     }
+    response_to_assignment(uni, cur_course_name, cur_course_id, cur_assignment_id);
 }
