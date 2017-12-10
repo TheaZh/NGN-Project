@@ -186,7 +186,7 @@ $(function () {
     // confirm add assignment
     $('#confirmAdd').click(function () {
 
-        if($('#description').val()==='' || $('#due-date').value == null){
+        if($('#description').val()==='' || $('#due-date').val() == null){
             $('#description-span').css("display", "block");
             return ;
         }
@@ -196,7 +196,7 @@ $(function () {
             data: {
                 'course_id': $('#hidden_course_id').text(),
                 'description': $('#description').val(),
-                'due_date': $('#due-date').value
+                'due_date': $('#due-date').val()
             },
             success: function () {
 
